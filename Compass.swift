@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-public var geo: GeometryProxy?
 
 struct Compass: View {
-    @Binding var election: Election
+    @ObservedObject var election: Election
+
     
     var body: some View {
         GeometryReader(content: { geo in
@@ -20,25 +20,18 @@ struct Compass: View {
                     .cornerRadius(15)
                 ForEach($election.voters, id: \.id ) { $v in
                     VoterDot(voter: $v, color: .constant($v.wrappedValue.findClosest(candidates: $election.candidates.wrappedValue)?.color))
-                        .position(mindToSpace(proxy: geo, opinion: $v.opinion.wrappedValue))
+                        .position(mindToSpace(proxy: geo, opinion: v.opinion))
                 }
-                ForEach($election.candidates, id: \.id) { $c in
-                    CandidateDot(candidate: $c)
-                        .position(mindToSpace(proxy: geo, opinion: $c.opinion.wrappedValue))
-                        .gesture(
-                            DragGesture()
-                                .onChanged { gesture in
-                                    let pos = spaceToMind(proxy: geo, location: gesture.location)
-                                    election.move(candidateId: c.id, newOpinion: pos)
-                                }
-                        )
+                ForEach($election.candidates, id: \.self) { $c in
+                    CandidateDot(candidate: $c, proxy: geo)
+                        
                 }
             }
         })
             
     }
 }
-
-#Preview {
-    Compass(election: .constant(Election(candidates: Candidate.generate(count: 2))))
-}
+//
+//#Preview {
+//    Compass(election: .constant(Election(candidates: Candidate.generate(count: 2))))
+//}

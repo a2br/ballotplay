@@ -36,10 +36,22 @@ public func distance(a: Entity, b: Entity) -> Double {
     sqrt(pow(a.opinion.0 - b.opinion.0, 2) + pow(a.opinion.1 - b.opinion.1, 2))
 }
 
+enum VotingSystem {
+    case plurality
+    case runoff
+    case approval
+}
 
-public struct Election {
-    var candidates: [Candidate]
-    var voters: [Voter] = Voter.populate(density: 0.1)
+public class Election: ObservableObject {
+    @Published var candidates: [Candidate]
+    @Published var voters: [Voter]
+    @Published var votingSystem: VotingSystem
+    
+    init(candidates: [Candidate], votingSystem: VotingSystem = .plurality, voters: [Voter] = Voter.populate(density: 1 / 8)) {
+        self.candidates = candidates
+        self.votingSystem = votingSystem
+        self.voters = voters
+    }
     
     func pluralityTally() -> [Dictionary<Candidate, Int>.Element] {
         // For each voter, add count to voter
@@ -48,11 +60,11 @@ public struct Election {
             let choice = v.findClosest(candidates: candidates)
             if (choice != nil) { counts[choice!]! += 1 }
         }
-        let sorted = counts.sorted(by: { $0.value < $1.value })
+        let sorted = counts.sorted(by: { $0.value > $1.value })
         return sorted
     }
     
-    mutating func move(candidateId: String, newOpinion: Opinion) {
+    func move(candidateId: UUID, newOpinion: Opinion) {
         candidates = candidates.map { c in
             if c.id == candidateId {
                 let newC = Candidate(id: c.id, opinion: newOpinion, name: c.name, color: c.color)
@@ -63,17 +75,19 @@ public struct Election {
 }
 
 public protocol Entity {
-    var id: String { get }
+    var id: UUID { get }
     var opinion: Opinion { get set }
 }
 
 
 public struct Candidate: Entity, Hashable {
-    public var id: String = UUID().uuidString
+    public var id: UUID = UUID()
     public var opinion: Opinion
     
     public let name: String
     public let color: Color
+    
+    public var locked: Bool = false
     
     
     // Make it hashable
@@ -99,7 +113,7 @@ public struct Candidate: Entity, Hashable {
 }
 
 public struct Voter: Entity, Hashable {
-    public var id: String = UUID().uuidString
+    public var id = UUID()
     public var opinion: Opinion
     
     // Make it hashable

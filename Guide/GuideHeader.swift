@@ -8,11 +8,24 @@
 import SwiftUI
 
 struct GuideHeader: View {
+    @Binding var page: Page
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+        VStack {
+            HStack {
+                Menu {
+                    // Menu
+                    Text("hello bitch")
+                } label: {
+                    Image(systemName: "list.bullet")
+                        .font(.system(.title3).bold())
+                        .foregroundColor(.accentColor)
+                }
+                Spacer()
+            }
+            .padding(10)
+            Divider()
+        }
 
-#Preview {
-    GuideHeader()
+    }
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-let VOTER_SIZE: CGFloat = 6
+let VOTER_SIZE: CGFloat = 16
 
 struct VoterDot: View {
     @Binding var voter: Voter
@@ -17,7 +17,7 @@ struct VoterDot: View {
     
     var body: some View {
         Rectangle()
-            .fill(color?.opacity(0.6) ?? Color(white: colorScheme == .light ? 0.75 : 0.25))
+            .fill(color?.opacity(0.5) ?? Color(white: colorScheme == .light ? 0.8 : 0.2))
             .frame(width: VOTER_SIZE, height: VOTER_SIZE)
     }
 }

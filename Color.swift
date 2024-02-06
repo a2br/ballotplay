@@ -13,8 +13,6 @@ public var colorNames: [Color:(String,[String])] =
         .red: ("Red", ["Ronald", "Robert", "Raphael"]),
         .blue: ("Blue", ["Beatrice", "Bob", "Bella"]),
         .green: ("Green", ["Giovanni", "George", "Graham"]),
-        .mint: ("Mint", ["Maggie", "Mathilde", "Matthew"]),
-        .pink: ("Pink", ["Patty", "Penelope", "Peter"]),
         .brown: ("Brown", ["Billy", "Ben", "Baptiste"]),
         .purple: ("Purple", ["Patricia", "Patrick", "Phoebe"]),
         .cyan: ("Cyan", ["Cindia", "Chloe", "Charlotte"]),

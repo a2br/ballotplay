@@ -1,18 +1,13 @@
 //
-//  SwiftUIView.swift
-//  
+//  Title.swift
+//
 //
 //  Created by Anatole Debierre on 06.02.2024.
 //
 
 import SwiftUI
 
-struct SwiftUIView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-#Preview {
-    SwiftUIView()
+public func Title(_ text: String) -> some View {
+    Text(text)
+        .font(.system(size: 35, weight: .bold))
 }

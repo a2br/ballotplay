@@ -7,31 +7,37 @@
 
 import SwiftUI
 
+public enum Page {
+    case welcome
+}
+
 struct GuideView: View {
-    @Binding var page: Int
+    @Binding var page: Page
     
     var body: some View {
-        HStack {
-            
-            
-            VStack(alignment: .leading) {
-                switch page {
-                case 0:
-                    WelcomePage()
-                default:
-                    Text("I'm sorry, an error came up.")
+        NavigationStack {
+            ScrollView {
+                HStack {
+                    VStack(alignment: .leading) {
+                        // GuideHeader(page: $page)
+                        Group {
+                            switch page {
+                            case .welcome:
+                                WelcomePage()
+                            }
+                            Spacer()
+                        }
+                        .padding(25)
+                        
+                    }
+                    Spacer()
                 }
-                Spacer()
+                .frame(
+                    maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,
+                    maxHeight: .infinity
+                )
             }
-            Spacer()
         }
-            .padding(25)
-            .frame(
-                maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,
-                maxHeight: .infinity
-            )
-
-        
     }
 }
 
