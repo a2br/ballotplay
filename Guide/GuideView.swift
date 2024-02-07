@@ -19,7 +19,6 @@ struct GuideView: View {
             ScrollView {
                 HStack {
                     VStack(alignment: .leading) {
-                        // GuideHeader(page: $page)
                         Group {
                             switch page {
                             case .welcome:
@@ -27,15 +26,10 @@ struct GuideView: View {
                             }
                             Spacer()
                         }
-                        .padding(25)
-                        
+                        .padding(30)
                     }
                     Spacer()
                 }
-                .frame(
-                    maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/,
-                    maxHeight: .infinity
-                )
             }
         }
     }

@@ -47,10 +47,23 @@ public class Election: ObservableObject {
     @Published var voters: [Voter]
     @Published var votingSystem: VotingSystem
     
+    @Published var winningColor: Color
+    
     init(candidates: [Candidate], votingSystem: VotingSystem = .plurality, voters: [Voter] = Voter.populate(density: 1 / 8)) {
         self.candidates = candidates
         self.votingSystem = votingSystem
         self.voters = voters
+        
+        self.winningColor = .gray
+    }
+    
+    // Creates an editable property that supports animations
+    func setWinningColor(_ color: Color) {
+        DispatchQueue.main.async {
+            withAnimation(.easeIn(duration: 0.4)) {
+                self.winningColor = color
+            }
+        }
     }
     
     func pluralityTally() -> [Dictionary<Candidate, Int>.Element] {

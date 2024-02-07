@@ -19,7 +19,7 @@ struct ContentView: View {
                     .frame(width: geo.size.width / 2, height: geo.size.height)
                 Divider()
                 GuideView(page: $page)
-                    .frame(width: geo.size.width / 2, height: geo.size.height)
+//                    .frame(width: geo.size.width / 2, height: geo.size.height)
             }
         
         }

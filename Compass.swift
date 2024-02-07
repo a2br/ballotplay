@@ -16,7 +16,7 @@ struct Compass: View {
         GeometryReader(content: { geo in
             ZStack {
                 Rectangle()
-                    .fill(.thickMaterial)
+                    .fill(.background)
                     .cornerRadius(15)
                 ForEach($election.voters, id: \.id ) { $v in
                     VoterDot(voter: $v, color: .constant($v.wrappedValue.findClosest(candidates: $election.candidates.wrappedValue)?.color))
