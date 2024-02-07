@@ -11,6 +11,10 @@ public enum Page {
     case welcome
 }
 
+public let pageNames: [Page: String] = [
+    .welcome: "Welcome"
+]
+
 struct GuideView: View {
     @Binding var page: Page
     
@@ -28,9 +32,21 @@ struct GuideView: View {
                         }
                         .padding(30)
                     }
-                    Spacer()
                 }
             }
+            .toolbar {
+                ToolbarItem {
+                    Menu {
+                        Text("Hello")
+                        Text("Hello")
+                        Text("Hello")
+                    } label: {
+                        Image(systemName: "list.bullet")
+                    }
+                }
+            }
+            Spacer()
+            GuideBar(page: $page)
         }
     }
 }
