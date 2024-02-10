@@ -12,7 +12,4 @@ public func Block(_ inside: () -> some View) -> some View {
         inside()
     }
     .padding(.vertical, 10)
-
-
-
 }

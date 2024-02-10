@@ -49,7 +49,7 @@ public class Election: ObservableObject {
     
     @Published var winningColor: Color
     
-    init(candidates: [Candidate], votingSystem: VotingSystem = .plurality, voters: [Voter] = Voter.populate(density: 1 / 8)) {
+    init(votingSystem: VotingSystem = .plurality, candidates: [Candidate] = Candidate.generate(count: 3), voters: [Voter] = Voter.populate(density: 1 / 8)) {
         self.candidates = candidates
         self.votingSystem = votingSystem
         self.voters = voters
@@ -77,19 +77,42 @@ public class Election: ObservableObject {
         return sorted
     }
     
-    func move(candidateId: UUID, newOpinion: Opinion) {
-        candidates = candidates.map { c in
-            if c.id == candidateId {
-                let newC = Candidate(id: c.id, opinion: newOpinion, name: c.name, color: c.color)
-                return newC
-            } else { return c }
-        }
+    func withoutWeakest() -> Election {
+        let tally = pluralityTally()
+        let weakest = tally.last!.key
+        let newCandidates = candidates.filter { $0 != weakest }
+        return Election(candidates: newCandidates, voters: voters)
     }
+    
+    // Round starts at 1
+    func irv(round: Int) -> Election {
+        var election: Election = self
+        for _ in 1...round {
+            // Going to next round
+            election = election.withoutWeakest()
+        }
+        return election
+    }
+    
+    func addCandidate() {
+        let (color, name) = generateColorPair(not: candidates.map { $0.color })
+        candidates += [Candidate(opinion: randomOpinion(), name: name, color: color)]
+    }
+    
+    func removeCandidate() {
+        candidates.removeLast()
+    }
+    
+
 }
 
 public protocol Entity {
     var id: UUID { get }
     var opinion: Opinion { get set }
+}
+
+public func randomOpinion() -> Opinion {
+    (Double.random(in: -1...1), Double.random(in: -1...1))
 }
 
 
@@ -116,8 +139,8 @@ public struct Candidate: Entity, Hashable {
         var candidates: [Candidate] = []
         for _ in 1...count {
             let (color, name) = generateColorPair(not: candidates.map { $0.color })
-            let opinion = (Double.random(in: -1...1), Double.random(in: -1...1))
-            let candidate = Candidate(opinion: opinion, name: name, color: color)
+            let opinion = randomOpinion()
+            let candidate = Candidate(opinion: opinion, name: name, color: color, locked: false)
             candidates.append(candidate)
         }
         return candidates

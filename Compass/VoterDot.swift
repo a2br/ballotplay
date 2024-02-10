@@ -19,6 +19,7 @@ struct VoterDot: View {
         Rectangle()
             .fill(color?.opacity(0.5) ?? Color(white: colorScheme == .light ? 0.8 : 0.2))
             .frame(width: VOTER_SIZE, height: VOTER_SIZE)
+            .cornerRadius(2)
     }
 }
 
