@@ -42,14 +42,19 @@ enum VotingSystem {
     case approval
 }
 
+
 public class Election: ObservableObject {
+    @Published var root: Election?
+    
     @Published var candidates: [Candidate]
     @Published var voters: [Voter]
     @Published var votingSystem: VotingSystem
     
     @Published var winningColor: Color
     
-    init(votingSystem: VotingSystem = .plurality, candidates: [Candidate] = Candidate.generate(count: 3), voters: [Voter] = Voter.populate(density: 1 / 8)) {
+    init(root: Election? = nil, votingSystem: VotingSystem = .plurality, candidates: [Candidate] = Candidate.generate(count: 3), voters: [Voter] = Voter.populate(density: 1 / 8)) {
+        self.root = root
+        
         self.candidates = candidates
         self.votingSystem = votingSystem
         self.voters = voters
@@ -60,7 +65,7 @@ public class Election: ObservableObject {
     // Creates an editable property that supports animations
     func setWinningColor(_ color: Color) {
         DispatchQueue.main.async {
-            withAnimation(.easeIn(duration: 0.4)) {
+            withAnimation(.easeIn(duration: 0)) {
                 self.winningColor = color
             }
         }
@@ -73,7 +78,7 @@ public class Election: ObservableObject {
             let choice = v.findClosest(candidates: candidates)
             if (choice != nil) { counts[choice!]! += 1 }
         }
-        let sorted = counts.sorted(by: { $0.value > $1.value })
+        let sorted = counts.sorted { $0.key.name < $1.key.name }.sorted(by: { $0.value > $1.value })
         return sorted
     }
     
@@ -81,17 +86,37 @@ public class Election: ObservableObject {
         let tally = pluralityTally()
         let weakest = tally.last!.key
         let newCandidates = candidates.filter { $0 != weakest }
-        return Election(candidates: newCandidates, voters: voters)
+        return Election(root: root ?? nil,candidates: newCandidates, voters: voters, votingSystem: votingSystem)
     }
     
-    // Round starts at 1
-    func irv(round: Int) -> Election {
-        var election: Election = self
-        for _ in 1...round {
-            // Going to next round
+    func irvRounds() -> [Election] {
+        var election: Election = self.copy()
+        election.root = self
+        election.votingSystem = .plurality
+        
+        var elections = [election]
+                
+        // Minimum number of votes for the last round
+        let half = voters.count / 2
+    
+        while election.candidates.count > 2 {
+            // Check if 1st has > half -> it's the last round, break out
+            let tally = election.pluralityTally()
+            let head = tally.first!
+            
+            let strictMajority = head.value >= half
+            
+            if strictMajority {
+                break
+            }
+            
+            // Else, remove weakest
             election = election.withoutWeakest()
+            elections.append(election)
         }
-        return election
+        
+        return elections
+        
     }
     
     func addCandidate() {
@@ -101,6 +126,16 @@ public class Election: ObservableObject {
     
     func removeCandidate() {
         candidates.removeLast()
+    }
+    
+    func push(_ e: Election) -> Void {
+        votingSystem = e.votingSystem
+        candidates = e.candidates
+        voters = e.voters
+    }
+    
+    func copy() -> Election {
+        Election(votingSystem: votingSystem, candidates: candidates, voters: voters)
     }
     
 
@@ -162,7 +197,7 @@ public struct Voter: Entity, Hashable {
     }
     
     public func findClosest(candidates: [Candidate]) -> Candidate? {
-        let distances = candidates.map { ($0, distance(a: self, b: $0)) }
+        let distances = candidates.sorted { $0.name < $1.name }.map { ($0, distance(a: self, b: $0)) }
         let closest = distances.min(by: { $0.1 < $1.1 })
         
         return closest?.0

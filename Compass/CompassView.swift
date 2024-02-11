@@ -16,8 +16,8 @@ struct CompassView: View {
                 Spacer()
                 
                 VStack(alignment: .leading) {
-                    if election.votingSystem == VotingSystem.plurality {
-                        
+                    switch election.votingSystem {
+                    case .plurality:
                         let winner = election.pluralityTally().first?.key
                         let _ = election.setWinningColor(winner?.color ?? .gray)
                         Group {
@@ -34,6 +34,8 @@ struct CompassView: View {
                                 .zIndex(1)
                         }
                         .aspectRatio(contentMode: .fit)
+                    default:
+                        Text("Under construction...")
                     }
                 }
                 .padding(25)

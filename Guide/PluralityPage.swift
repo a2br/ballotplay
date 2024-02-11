@@ -13,7 +13,6 @@ struct PluralityPage: View {
     @State var artificialCount: Int // Has to be the initial number of candidates
     
     var body: some View {
-                
 
         VStack(alignment: .leading) {
             Text(

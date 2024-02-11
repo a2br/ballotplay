@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 17.0, *)
 struct GeneralView: View {
     @State var page: Page = Page.allCases.first!
     var election = Election(candidates: Candidate.generate(count: 3))

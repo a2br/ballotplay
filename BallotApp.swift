@@ -8,6 +8,7 @@ struct MyApp: App {
                 GeneralView()
             } else {
                 // Fallback on earlier versions
+                Text("This page is only available on iOS 17.0 or later.")
             }
         }
     }

@@ -32,3 +32,11 @@ public func generateColorPair(not: [Color] = []) -> (Color, String) {
     
     return (color, name)
 }
+
+public func generateMultipleColorPairs(_ n: Int) -> [(Color, String)] {
+    var pairs: [(Color, String)] = []
+    for _ in 1...n {
+        pairs.append(generateColorPair(not: pairs.map { $0.0 }))
+    }
+    return pairs
+}

@@ -42,29 +42,26 @@ func getPage(_ page: Page, plus: Int = 1) -> Page? {
     return Page(rawValue: newIndex)
 }
 
-//TODO: Hey
-var defaultElections: [Page: Election] = [
-    .plurality: Election(),
-    .spoilerEffect: Election(),
-    
-    .irv: Election(),
-    .centerSqueeze: Election(),
-    
-    .approval: Election()
+let sC = generateMultipleColorPairs(3)
+let sD = generateMultipleColorPairs(3)
+
+
+public let specialElections: [Page: Election] = [
+    .spoilerEffect: Election(
+        votingSystem: .plurality,
+        candidates: [
+            Candidate(opinion: (-0.5, -0.5), name: sC[0].1, color: sC[0].0, locked: true),
+            Candidate(opinion: (0.2, 0.25), name: sC[1].1, color: sC[1].0, locked: true),
+            Candidate(opinion: (1, -1), name: sC[2].1, color: sC[2].0, locked: false)
+        ]
+    ),
+    .centerSqueeze: Election(
+        votingSystem: .runoff,
+        candidates: [
+            Candidate(opinion: (-0.3, -0.3), name: sD[0].1, color: sD[0].0, locked: true),
+            Candidate(opinion: (0.1, 0.1), name: sD[1].1, color: sD[1].0, locked: true),
+            Candidate(opinion: (0.5, 0.5), name: sD[2].1, color: sD[2].0, locked: false)
+        ]
+    )
 ]
 
-//TODO: Remove or implement?
-class ElectionManager: ObservableObject {
-    @Published var page: Page
-    @Published var elections: [Page:Election]
-    
-    var election: Election {
-        elections[page]!
-    }
-    
-    init(page: Page = Page.allCases.first!) {
-        self.elections = defaultElections
-        self.page = page
-    }
-    
-}

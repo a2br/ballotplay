@@ -29,11 +29,9 @@ struct Compass: View {
                 ForEach($election.candidates, id: \.self) { $c in
                     CandidateDot(candidate: $c, proxy: geo)
                 }
-                .animation(nil)
-
             }
+            .animation(nil)
         })
-            
     }
 }
 //

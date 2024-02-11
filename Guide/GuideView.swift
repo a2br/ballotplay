@@ -7,7 +7,9 @@
 
 import SwiftUI
 
+var defaultE: Election?
 
+@available(iOS 17.0, *)
 struct GuideView: View {
     @Binding var page: Page
     @EnvironmentObject var election: Election
@@ -20,9 +22,9 @@ struct GuideView: View {
                         Group {
                             switch page {
                             case .plurality:
-                                if #available(iOS 17.0, *) {
-                                    PluralityPage(artificialCount: election.candidates.count)
-                                } else { Text("This app is only available on iOS 17.0 or later.") }
+                                PluralityPage(artificialCount: election.candidates.count)
+                            case .spoilerEffect:
+                                SpoilerPage()
                             default:
                                 Text("Not finished yet!")
                             }
@@ -65,6 +67,31 @@ struct GuideView: View {
                         }.disabled(isLast)
                     }
                 }
+            }
+        }
+        .onChange(of: page) { old, new in
+           
+            // Set special boards
+            
+            let specialOld = specialElections[old]
+            let specialNew = specialElections[new]
+            
+            if (specialOld != nil) {
+                election.push(defaultE!)
+            }
+            if (specialNew != nil) {
+                defaultE = election.copy()
+                election.push(specialNew!)
+            }
+            
+            // Set special voting system
+            switch new {
+            case .plurality, .spoilerEffect:
+                election.votingSystem = .plurality
+            case .irv, .centerSqueeze:
+                election.votingSystem = .runoff
+            case .approval:
+                election.votingSystem = .approval
             }
         }
     }
