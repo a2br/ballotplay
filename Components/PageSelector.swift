@@ -16,7 +16,11 @@ struct PageSelector: View {
         Button {
             page = p
         } label: {
-            Label(pageNames[p]!, systemImage: isCurrent ? "checkmark" : "")
+            if isCurrent {
+                Label(pageNames[p]!, systemImage: "checkmark")
+            } else {
+                Text(pageNames[p]!)
+            }
         }.disabled(isCurrent)
     }
 }
