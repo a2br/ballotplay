@@ -15,13 +15,8 @@ struct CompassView: View {
         election.irvRounds()
     }
     var facade: Election {
-        //TODO: Find a prettier fix! But that's good enough.
         let irvRounds = irvRounds
-        var r = round
-        if (irvRounds.count <= round) {
-            r = irvRounds.count - 1
-        }
-        return irvRounds[r]
+        return irvRounds[round]
     }
     
     // For IRV, updates the root election
@@ -33,6 +28,8 @@ struct CompassView: View {
                 return c
             }
         }
+        
+        round = min(round, irvRounds.count - 1)
     }
     
     var body: some View {
@@ -62,7 +59,6 @@ struct CompassView: View {
                     case .runoff:
                         // Brand new election
                         HStack {
-                        
                             Button {
                                 round = max(round - 1, 0)
                             } label: {
