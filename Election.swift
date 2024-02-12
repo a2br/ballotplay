@@ -43,8 +43,12 @@ enum VotingSystem {
 }
 
 
-public class Election: ObservableObject {
-    @Published var root: Election?
+public class Election: ObservableObject, Equatable {
+    public static func == (lhs: Election, rhs: Election) -> Bool {
+        lhs.candidates == rhs.candidates &&
+        lhs.voters == rhs.voters &&
+        lhs.votingSystem == rhs.votingSystem
+    }
     
     @Published var candidates: [Candidate]
     @Published var voters: [Voter]
@@ -52,8 +56,11 @@ public class Election: ObservableObject {
     
     @Published var winningColor: Color
     
-    init(root: Election? = nil, votingSystem: VotingSystem = .plurality, candidates: [Candidate] = Candidate.generate(count: 3), voters: [Voter] = Voter.populate(density: 1 / 8)) {
-        self.root = root
+    var activeCandidates: [Candidate] {
+        candidates.filter { !$0.ghost }
+    }
+    
+    init(votingSystem: VotingSystem = .plurality, candidates: [Candidate] = Candidate.generate(count: 3), voters: [Voter] = Voter.populate(density: 1 / 8)) {
         
         self.candidates = candidates
         self.votingSystem = votingSystem
@@ -73,9 +80,15 @@ public class Election: ObservableObject {
     
     func pluralityTally() -> [Dictionary<Candidate, Int>.Element] {
         // For each voter, add count to voter
-        var counts = Dictionary(uniqueKeysWithValues: candidates.map { ($0, 0) })
+        let activeCandidates = activeCandidates
+        
+        var counts = Dictionary(
+            uniqueKeysWithValues: activeCandidates
+                .map { ($0, 0) }
+        )
+        
         for v in voters {
-            let choice = v.findClosest(candidates: candidates)
+            let choice = v.findClosest(candidates: activeCandidates)
             if (choice != nil) { counts[choice!]! += 1 }
         }
         let sorted = counts.sorted { $0.key.name < $1.key.name }.sorted(by: { $0.value > $1.value })
@@ -85,13 +98,19 @@ public class Election: ObservableObject {
     func withoutWeakest() -> Election {
         let tally = pluralityTally()
         let weakest = tally.last!.key
-        let newCandidates = candidates.filter { $0 != weakest }
-        return Election(root: root ?? nil,candidates: newCandidates, voters: voters, votingSystem: votingSystem)
+        let newCandidates = candidates.map { c in
+            if c == weakest {
+                return Candidate(id: c.id, opinion: c.opinion, name: c.name, color: c.color, ghost: true, locked: c.locked)
+            } else {
+                return c
+            }
+        }
+        
+        return Election(votingSystem: votingSystem, candidates: newCandidates, voters: voters)
     }
     
     func irvRounds() -> [Election] {
         var election: Election = self.copy()
-        election.root = self
         election.votingSystem = .plurality
         
         var elections = [election]
@@ -99,7 +118,7 @@ public class Election: ObservableObject {
         // Minimum number of votes for the last round
         let half = voters.count / 2
     
-        while election.candidates.count > 2 {
+        while election.activeCandidates.count > 2 {
             // Check if 1st has > half -> it's the last round, break out
             let tally = election.pluralityTally()
             let head = tally.first!
@@ -137,8 +156,6 @@ public class Election: ObservableObject {
     func copy() -> Election {
         Election(votingSystem: votingSystem, candidates: candidates, voters: voters)
     }
-    
-
 }
 
 public protocol Entity {
@@ -157,6 +174,7 @@ public struct Candidate: Entity, Hashable {
     
     public let name: String
     public let color: Color
+    public var ghost: Bool = false
     
     public var locked: Bool = false
     
