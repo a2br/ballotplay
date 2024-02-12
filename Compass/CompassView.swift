@@ -10,13 +10,14 @@ import SwiftUI
 @available(iOS 17.0, *)
 struct CompassView: View {
     @EnvironmentObject var election: Election
-    @State var round = 0
+    
     var irvRounds: [Election] {
         election.irvRounds()
     }
+    
     var facade: Election {
         let irvRounds = irvRounds
-        return irvRounds[round]
+        return irvRounds[election.round]
     }
     
     // For IRV, updates the root election
@@ -29,7 +30,8 @@ struct CompassView: View {
             }
         }
         
-        round = min(round, irvRounds.count - 1)
+        // Will step round count down when max is lowered
+        election.round = min(election.round, irvRounds.count - 1)
     }
     
     var body: some View {
@@ -57,18 +59,28 @@ struct CompassView: View {
                         }
                         .aspectRatio(contentMode: .fit)
                     case .runoff:
+                        let winner = irvRounds.last!.pluralityTally().first?.key
+                        let _ = election.setWinningColor(winner?.color ?? .gray)
+                        Group {
+                            // Find who the fuck is winning
+                            Text(winner?.name ?? "Nobody")
+                                .foregroundColor(winner?.color ?? .gray)
+                            + Text(" is winning with IRV after \(irvRounds.count) rounds.")
+                        }
+                        .font(.system(size: 35, weight: .bold))
+                        
                         // Brand new election
                         HStack {
                             Button {
-                                round = max(round - 1, 0)
+                                election.round = max(election.round - 1, 0)
                             } label: {
                                 Text("Rem -")
                             }
                             
-                            Text("Round: \(round)")
+                            Text("Round: \(election.round + 1)/\(irvRounds.count)")
                             
                             Button {
-                                round = min(round + 1, irvRounds.count - 1)
+                                election.round = min(election.round + 1, irvRounds.count - 1)
                             } label: {
                                 Text("Add +")
                             }
@@ -81,10 +93,24 @@ struct CompassView: View {
                         }
                         .aspectRatio(contentMode: .fit)
 
-
                         
-                    default:
-                        Text("Under construction...")
+                    case .approval:
+                        let winner = election.approvalTally().first?.key
+                        let _ = election.setWinningColor(winner?.color ?? .gray)
+                        Group {
+                            //Find who the fuck is winning
+                            Text(winner?.name ?? "Nobody")
+                                .foregroundColor(winner?.color ?? .gray)
+                            + Text(" is winning with Approval Voting.")
+                        }
+                        .font(.system(size: 35, weight: .bold))
+                        
+                        GeometryReader { geo in
+                            Compass(election: election)
+                                .frame(width: geo.size.width, height: geo.size.width)
+                                .shadow(color: election.winningColor.opacity(0.9), radius: 300)
+                        }
+                        .aspectRatio(contentMode: .fit)
                     }
                 }
                 .padding(25)

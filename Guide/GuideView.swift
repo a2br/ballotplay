@@ -22,7 +22,7 @@ struct GuideView: View {
                         Group {
                             switch page {
                             case .plurality:
-                                PluralityPage(artificialCount: election.candidates.count)
+                                PluralityPage()
                             case .spoilerEffect:
                                 SpoilerPage()
                             default:

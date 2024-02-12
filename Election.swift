@@ -21,6 +21,17 @@ public func mindToSpace(proxy: GeometryProxy, opinion: Opinion) -> CGPoint {
     return CGPoint(x: x, y: y)
 }
 
+public func mindToSpace(proxy: GeometryProxy, distance: Double) -> Double {
+    let frame = proxy.frame(in: .local)
+    let dim = frame.width - CANDIDATE_SIZE
+    // half in real life, represents 1 in mind
+    let half = dim / 2
+    
+    let d = distance * half
+    
+    return d
+}
+
 public func spaceToMind(proxy: GeometryProxy, location: CGPoint) -> Opinion {
     let frame = proxy.frame(in: .local)
     let dim = frame.width - CANDIDATE_SIZE
@@ -32,7 +43,7 @@ public func spaceToMind(proxy: GeometryProxy, location: CGPoint) -> Opinion {
     return (x, y)
 }
 
-public func distance(a: Entity, b: Entity) -> Double {
+public func distanceBetween(a: Entity, b: Entity) -> Double {
     sqrt(pow(a.opinion.0 - b.opinion.0, 2) + pow(a.opinion.1 - b.opinion.1, 2))
 }
 
@@ -54,25 +65,54 @@ public class Election: ObservableObject, Equatable {
     @Published var voters: [Voter]
     @Published var votingSystem: VotingSystem
     
+    // Counter for IRV
+    @Published var round: Int
+    // Tolerance for Approval
+    @Published var tolerance: Double
+    
     @Published var winningColor: Color
+    var candidateCount: Int {
+        get {
+            candidates.count
+        }
+        set {
+            // How many to add ?
+            let diff = newValue - candidates.count
+            let abs = abs(diff)
+            
+            // Remove or add them
+            if diff < 0 {
+                for _ in 1...abs {
+                    self.removeCandidate()
+                }
+            } else if diff > 0 {
+                for _ in 1...abs {
+                    self.addCandidate()
+                }
+            }
+        }
+    }
     
     var activeCandidates: [Candidate] {
         candidates.filter { !$0.ghost }
     }
     
-    init(votingSystem: VotingSystem = .plurality, candidates: [Candidate] = Candidate.generate(count: 3), voters: [Voter] = Voter.populate(density: 1 / 8)) {
+    init(votingSystem: VotingSystem = .plurality, candidates: [Candidate] = Candidate.generate(count: 3), voters: [Voter] = Voter.populate(density: 1 / 8), round: Int = 0, tolerance: Double = 0.6) {
         
         self.candidates = candidates
         self.votingSystem = votingSystem
         self.voters = voters
         
         self.winningColor = .gray
+        
+        self.round = round
+        self.tolerance = tolerance
     }
     
     // Creates an editable property that supports animations
     func setWinningColor(_ color: Color) {
         DispatchQueue.main.async {
-            withAnimation(.easeIn(duration: 0)) {
+            withAnimation(.easeIn(duration: 0.2)) {
                 self.winningColor = color
             }
         }
@@ -91,8 +131,39 @@ public class Election: ObservableObject, Equatable {
             let choice = v.findClosest(candidates: activeCandidates)
             if (choice != nil) { counts[choice!]! += 1 }
         }
-        let sorted = counts.sorted { $0.key.name < $1.key.name }.sorted(by: { $0.value > $1.value })
+        let sorted = counts
+            .sorted { $0.key.name < $1.key.name }
+            .sorted(by: { $0.value > $1.value })
         return sorted
+    }
+    
+    func approvalTally() -> [Dictionary<Candidate, Int>.Element] {
+        // Active or inactive candidates don't matter, there are no rounds
+        var counts = Dictionary(
+            uniqueKeysWithValues: candidates
+                .map { ($0, 0) }
+        )
+        
+        for v in voters {
+            for c in candidates {
+                let d = v.distance(to: c)
+                if d < tolerance {
+                    counts[c]! += 1
+                }
+            }
+        }
+        
+        let sorted = counts
+            .sorted { $0.key.name < $1.key.name }
+            .sorted(by: { $0.value > $1.value })
+        
+        return sorted
+    }
+    
+    func approvalBallot(voter: Voter) -> [Candidate] {
+        candidates.filter {
+            voter.distance(to: $0) < tolerance
+        }
     }
     
     func withoutWeakest() -> Election {
@@ -139,7 +210,7 @@ public class Election: ObservableObject, Equatable {
     }
     
     func addCandidate() {
-        let (color, name) = generateColorPair(not: candidates.map { $0.color })
+        let (color, name) = generateColorPair(not: candidates.map { $0.color })!
         candidates += [Candidate(opinion: randomOpinion(), name: name, color: color)]
     }
     
@@ -149,18 +220,30 @@ public class Election: ObservableObject, Equatable {
     
     func push(_ e: Election) -> Void {
         votingSystem = e.votingSystem
+        
         candidates = e.candidates
         voters = e.voters
+        
+        round = e.round
+        tolerance = e.tolerance
     }
     
     func copy() -> Election {
-        Election(votingSystem: votingSystem, candidates: candidates, voters: voters)
+        Election(
+            votingSystem: votingSystem,
+            candidates: candidates,
+            voters: voters,
+            round: round,
+            tolerance: tolerance
+        )
     }
 }
 
 public protocol Entity {
     var id: UUID { get }
     var opinion: Opinion { get set }
+    
+    func distance(to: Entity) -> Double
 }
 
 public func randomOpinion() -> Opinion {
@@ -191,12 +274,16 @@ public struct Candidate: Entity, Hashable {
     static func generate(count: Int = 1) -> [Candidate] {
         var candidates: [Candidate] = []
         for _ in 1...count {
-            let (color, name) = generateColorPair(not: candidates.map { $0.color })
+            let (color, name) = generateColorPair(not: candidates.map { $0.color })!
             let opinion = randomOpinion()
             let candidate = Candidate(opinion: opinion, name: name, color: color, locked: false)
             candidates.append(candidate)
         }
         return candidates
+    }
+    
+    public func distance(to: Entity) -> Double {
+        distanceBetween(a: self, b: to)
     }
     
 }
@@ -215,10 +302,14 @@ public struct Voter: Entity, Hashable {
     }
     
     public func findClosest(candidates: [Candidate]) -> Candidate? {
-        let distances = candidates.sorted { $0.name < $1.name }.map { ($0, distance(a: self, b: $0)) }
+        let distances = candidates.sorted { $0.name < $1.name }.map { ($0, self.distance(to: $0)) }
         let closest = distances.min(by: { $0.1 < $1.1 })
         
         return closest?.0
+    }
+    
+    public func distance(to: Entity) -> Double {
+        distanceBetween(a: self, b: to)
     }
     
     static func populate(density: Double) -> [Voter] {

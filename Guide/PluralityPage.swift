@@ -10,10 +10,9 @@ import SwiftUI
 @available(iOS 17.0, *)
 struct PluralityPage: View {
     @EnvironmentObject var election: Election
-    @State var artificialCount: Int // Has to be the initial number of candidates
     
     var body: some View {
-
+        
         VStack(alignment: .leading) {
             Text(
                 """
@@ -24,15 +23,7 @@ struct PluralityPage: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(.regularMaterial)
-                Stepper("Number of candidates: \(artificialCount)", value: $artificialCount, in: 1...(colorNames.count-1))
-                    .onChange(of: artificialCount) { old, new in
-                        if new > old {
-                            election.addCandidate()
-                        } else {
-                            election.removeCandidate()
-                        }
-                        
-                    }
+                Stepper("Number of candidates: \(election.candidateCount)", value: $election.candidateCount, in: 1...colorNames.count)
                     .padding(20)
             }
             
