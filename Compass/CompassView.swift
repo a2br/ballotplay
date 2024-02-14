@@ -18,7 +18,6 @@ struct CompassView: View {
         DispatchQueue.main.async {
             withAnimation(.easeIn(duration: 0.2)) {
                 winningColor = color
-                print("Setting winning color", color)
             }
         }
     }
@@ -54,7 +53,7 @@ struct CompassView: View {
         VStack
             {
                 Spacer()
-                
+                                
                 VStack(alignment: .leading) {
                     switch election.votingSystem {
                     case .plurality:

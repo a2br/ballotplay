@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+let PRACTICAL_MAX_TOLERANCE = 2.squareRoot() + 0.01
+
 // Heavens forbid, this Panel will never find itself handling an election under oversight.
 struct ControlPanel: View {
     @EnvironmentObject var election: Election
@@ -20,6 +22,7 @@ struct ControlPanel: View {
             }
         )
         let maxCount = election.irvRounds().count
+        
         ZStack {
             RoundedRectangle(cornerRadius: 10)
                 .fill(.regularMaterial)
@@ -49,6 +52,21 @@ struct ControlPanel: View {
                     }
                     .padding()
 
+                }
+                
+                if (election.votingSystem == .approval) {
+                    Divider()
+                    HStack {
+                        Text("Tolerance: \((election.tolerance / PRACTICAL_MAX_TOLERANCE) * 100, specifier: "%.0f")%")
+                        Spacer()
+                        Slider(
+                            value: $election.tolerance,
+                            in: 0.2...PRACTICAL_MAX_TOLERANCE
+                        )
+                        .frame(maxWidth: 250)
+                        .padding(.horizontal)
+                    }
+                    .padding()
                 }
 
             }

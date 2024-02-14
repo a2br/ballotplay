@@ -156,6 +156,10 @@ public class Election: ObservableObject, Equatable {
         }
     }
     
+    func irvBallot(voter: Voter) -> [Candidate] {
+        self.candidates.sorted { voter.distance(to: $0) < voter.distance(to: $1) }
+    }
+    
     func withoutWeakest() -> Election {
         let tally = pluralityTally()
         let weakest = tally.last!.key

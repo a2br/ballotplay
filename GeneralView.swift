@@ -22,7 +22,6 @@ struct GeneralView: View {
                 Divider()
                 GuideView(page: $page)
                     .environmentObject(election)
-//                    .frame(width: geo.size.width / 2, height: geo.size.height)
             }
         
         }

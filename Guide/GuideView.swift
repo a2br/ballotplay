@@ -26,7 +26,7 @@ struct GuideView: View {
                             case .irv:
                                 RunoffPage()
                             case .centerSqueeze:
-                                Text("Not finished yet!")
+                                CenterSqueezePage()
                             case .approval:
                                 ApprovalPage()
                             }
@@ -34,9 +34,10 @@ struct GuideView: View {
                     }
                     .navigationTitle(pageNames[page]!)
                     .padding(30)
+                    Spacer()
                 }
             }
-            .animation(nil)
+            .frame(maxWidth: .infinity)
             .toolbar {
                 ToolbarItem(placement: .automatic) {
                     

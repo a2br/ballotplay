@@ -10,8 +10,20 @@ import SwiftUI
 @available(iOS 17.0, *)
 struct PluralityPage: View {
     @EnvironmentObject var election: Election
+    @State private var showSheet: Bool = false
     
     var body: some View {
+        
+            Rectangle()
+                .frame(width: 0, height: 0)
+                .sheet(isPresented: $showSheet) {
+                    Text("hi")
+                    Button {
+                        showSheet = false
+                    } label: {
+                        Text("Close :)")
+                    }
+                }
         
             Text(
                 """

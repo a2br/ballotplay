@@ -1,15 +1,17 @@
 import SwiftUI
+import TipKit
 
+@available(iOS 17.0, *)
 @main
-struct MyApp: App {
+struct BallotApp: App {
+    
+    init() {
+        try? Tips.configure()
+    }
+    
     var body: some Scene {
         WindowGroup {
-            if #available(iOS 17.0, *) {
-                GeneralView()
-            } else {
-                // Fallback on earlier versions
-                Text("This page is only available on iOS 17.0 or later.")
-            }
+            GeneralView()
         }
     }
 }
