@@ -7,11 +7,9 @@
 
 import SwiftUI
 
-var saved: Election?
 
 struct SpoilerPage: View {
     @EnvironmentObject var election: Election
-    var special: Election = Election(voters: Voter.populate(density: 0.2))
     
     var body: some View {
         VStack {

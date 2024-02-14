@@ -13,31 +13,18 @@ struct PluralityPage: View {
     
     var body: some View {
         
-        VStack(alignment: .leading) {
             Text(
                 """
                 Plurality voting is the most widely used voting system. It is hard to think of something more intuitive: “Just pick the candidate you like best.”
                 """
             )
             
-            ZStack {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(.regularMaterial)
-                Stepper("Number of candidates: \(election.candidateCount)", value: $election.candidateCount, in: 1...colorNames.count)
-                    .padding(20)
-            }
+            ControlPanel()
             
 
             
             Text(election.pluralityTally().map { "\($0.key.name): \($0.value)" }.description)
 
-                
-        }
-        // .fixedSize(horizontal: false, vertical: true) // Allow for multiple lines (even when they're not filled)
-        .onAppear {
-            // Maybe set up the political compass
-            // print("Appearing")
-        }
     }
     
 }

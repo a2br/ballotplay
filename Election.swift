@@ -66,11 +66,11 @@ public class Election: ObservableObject, Equatable {
     @Published var votingSystem: VotingSystem
     
     // Counter for IRV
-    @Published var round: Int
     // Tolerance for Approval
+    @Published var round: Int
     @Published var tolerance: Double
+        
     
-    @Published var winningColor: Color
     var candidateCount: Int {
         get {
             candidates.count
@@ -97,27 +97,17 @@ public class Election: ObservableObject, Equatable {
         candidates.filter { !$0.ghost }
     }
     
-    init(votingSystem: VotingSystem = .plurality, candidates: [Candidate] = Candidate.generate(count: 3), voters: [Voter] = Voter.populate(density: 1 / 8), round: Int = 0, tolerance: Double = 0.6) {
+    init(votingSystem: VotingSystem = .plurality, candidates: [Candidate] = Candidate.generate(count: 3), voters: [Voter] = Voter.populate(density: 1 / 8), round: Int = 0, tolerance: Double = 0.8) {
         
         self.candidates = candidates
         self.votingSystem = votingSystem
         self.voters = voters
-        
-        self.winningColor = .gray
-        
+                
         self.round = round
         self.tolerance = tolerance
     }
     
-    // Creates an editable property that supports animations
-    func setWinningColor(_ color: Color) {
-        DispatchQueue.main.async {
-            withAnimation(.easeIn(duration: 0.2)) {
-                self.winningColor = color
-            }
-        }
-    }
-    
+
     func pluralityTally() -> [Dictionary<Candidate, Int>.Element] {
         // For each voter, add count to voter
         let activeCandidates = activeCandidates

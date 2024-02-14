@@ -10,10 +10,14 @@ import SwiftUI
 
 struct Compass: View {
     @ObservedObject var election: Election
+    @Binding var frameColor: Color
+
     var onCandidateMove: ((Candidate) -> Void)?
     
-    var actualCandidates: [Candidate] {
-        election.candidates.filter { !$0.ghost }
+    init(election: Election, frameColor: Binding<Color> = .constant(.gray), onCandidateMove: ((Candidate) -> Void)? = nil) {
+        self.election = election
+        self._frameColor = frameColor
+        self.onCandidateMove = onCandidateMove
     }
     
     var body: some View {
@@ -24,7 +28,7 @@ struct Compass: View {
                     .cornerRadius(15)
                     .overlay(
                         RoundedRectangle(cornerRadius: 15)
-                            .stroke(election.winningColor, lineWidth: 4)
+                            .stroke(frameColor, lineWidth: 4)
                     )
                 ForEach($election.voters, id: \.id ) { $v in
                     VoterDot(
@@ -35,7 +39,7 @@ struct Compass: View {
                             : $v.wrappedValue.findClosest(candidates: election.activeCandidates)?.color
                         ) ?? .primary.opacity(0.2))
                     )
-                        .position(mindToSpace(proxy: geo, opinion: v.opinion))
+                    .position(mindToSpace(proxy: geo, opinion: v.opinion))
                 }
                 if election.votingSystem == .approval {
                     ForEach($election.candidates, id: \.id) { $c in
@@ -58,7 +62,3 @@ struct Compass: View {
         })
     }
 }
-//
-//#Preview {
-//    Compass(election: .constant(Election(candidates: Candidate.generate(count: 2))))
-//}

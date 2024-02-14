@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-var defaultE: Election?
 
 @available(iOS 17.0, *)
 struct GuideView: View {
@@ -19,20 +18,22 @@ struct GuideView: View {
             ScrollView {
                 HStack {
                     VStack(alignment: .leading) {
-                        Group {
                             switch page {
                             case .plurality:
                                 PluralityPage()
                             case .spoilerEffect:
                                 SpoilerPage()
-                            default:
+                            case .irv:
+                                RunoffPage()
+                            case .centerSqueeze:
                                 Text("Not finished yet!")
+                            case .approval:
+                                ApprovalPage()
                             }
                             Spacer()
-                        }
-                        .navigationTitle(pageNames[page]!)
-                        .padding(30)
                     }
+                    .navigationTitle(pageNames[page]!)
+                    .padding(30)
                 }
             }
             .animation(nil)

@@ -42,6 +42,8 @@ func getPage(_ page: Page, plus: Int = 1) -> Page? {
     return Page(rawValue: newIndex)
 }
 
+var defaultE: Election?
+
 let sC = generateMultipleColorPairs(3)
 let sD = generateMultipleColorPairs(3)
 
