@@ -15,13 +15,6 @@ struct ControlPanel: View {
 
     
     var body: some View {
-        let roundCount = Binding(
-            get: { Double(election.round) },
-            set: {
-                election.round = Int($0)
-            }
-        )
-        let maxCount = election.irvRounds().count
         
         ZStack {
             RoundedRectangle(cornerRadius: 10)
@@ -30,28 +23,7 @@ struct ControlPanel: View {
             VStack {
                 Stepper("Number of candidates: \(election.candidateCount)", value: $election.candidateCount, in: 1...colorNames.count)
 
-                if (election.votingSystem == .runoff) {
-                    Divider()
-                        .padding(.vertical, 10)
-                    HStack {
-                        Text("Round")
-                        Spacer()
-                        Slider(
-                            value: roundCount,
-                            in: maxCount == 1 ? -1...0 :  0...Double(maxCount - 1)
-                        ) {
-                        } minimumValueLabel: {
-                            Text("1").font(.title2).fontWeight(.thin)
-                        } maximumValueLabel: {
-                            Text("\(maxCount)").font(.title2).fontWeight(.thin)
-                        }
-                        // WARN: Arbitrary number
-                        .frame(maxWidth: 250)
-                        .disabled(maxCount == 1)
-                    }
 
-                }
-                
                 if (election.votingSystem == .approval) {
                     Divider()
                         .padding(.vertical, 10)
@@ -66,7 +38,8 @@ struct ControlPanel: View {
                     }
                 }
 
-            }.padding(20)
+            }
+            .padding(20)
 
             
         }

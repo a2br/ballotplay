@@ -8,6 +8,7 @@
 import SwiftUI
 
 
+@available(iOS 17.0, *)
 struct Leaderboard: View {
     @EnvironmentObject var election: Election
 
@@ -119,19 +120,33 @@ struct Leaderboard: View {
                     // Still in VStack
                     if (election.votingSystem == .runoff) {
                         
+                        let tally = election.irvRounds()[election.round].pluralityTally()
                         
-                        Text("Phobe Purple gets eliminated.")
+                        let half = Double(election.voters.count) / 2
+                        let overHalf = Double(tally.first!.value) >= half
+                        
+                        let head = tally.first!.key
+                        let tail = tally.last!.key
+                        
+                        Group {
+                            let subject = overHalf ? head : tail
+                            
+                            Text(subject.name)
+                                .bold()
+                                .foregroundStyle(subject.color)
+                            
+                            +
+                            
+                            (overHalf ?
+                                Text(" wins with \(Double(tally.first!.value) / Double(election.voters.count) * 100, specifier: "%.1f")% of votes.")
+                            : Text(" is eliminated."))
+                            
+                        }
                             .font(.footnote)
                             .padding(.top, 15)
-                        
-                        
-                        
-                        
                     }
                 }
                 .padding(20)
-                
-                
             }
             
             HStack {
@@ -145,6 +160,11 @@ struct Leaderboard: View {
             }
             
         }
+        .padding(.bottom, 20)
+        Divider()
+            .padding(.bottom, 20)
+
+
     }
 }
 

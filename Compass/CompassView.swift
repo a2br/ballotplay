@@ -76,6 +76,11 @@ struct CompassView: View {
                     case .runoff:
                         let winner = irvRounds.last!.pluralityTally().first?.key
                         let _ = setWinningColor(winner?.color ?? .gray)
+                        
+                        let rounds = election.irvRounds()
+                        let isFirst = election.round == 0
+                        let isLast = election.round == rounds.count - 1
+                        
                         Group {
                             // Find who the fuck is winning
                             Text(winner?.name ?? "Nobody")
@@ -84,23 +89,41 @@ struct CompassView: View {
                         }
                         .font(.system(size: 35, weight: .bold))
                         
-                        // Brand new election
-                        HStack {
-                            Button {
-                                election.round = max(election.round - 1, 0)
-                            } label: {
-                                Text("Rem -")
+                        // Round Stepper
+                        ZStack {
+                            HStack {
+                                Spacer()
+                                
+                                Text("Round \(election.round + 1)/\(irvRounds.count)")
+
+                                
+                                Spacer()
                             }
                             
-                            Text("Round: \(election.round + 1)/\(irvRounds.count)")
-                            
-                            Button {
-                                election.round = min(election.round + 1, irvRounds.count - 1)
-                            } label: {
-                                Text("Add +")
+                            HStack {
+                                Button {
+                                    election.round = max(election.round - 1, 0)
+                                } label: {
+                                    Image(systemName: "chevron.backward")
+                                    Text("Previous")
+                                }
+                                .disabled(isFirst)
+                                
+                                Spacer()
+                                
+                                Button {
+                                    election.round = min(election.round + 1, irvRounds.count - 1)
+                                } label: {
+                                    Text("Next")
+                                    Image(systemName: "chevron.forward")
+                                }
+                                .disabled(isLast)
+
+                                
                             }
-                            
                         }
+                        .padding(.vertical, 5)
+                        
                         GeometryReader { geo in
                             Compass(election: facade, frameColor: $winningColor, onCandidateMove: onCandidateMove)
                                 .frame(width: geo.size.width, height: geo.size.width)

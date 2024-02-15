@@ -181,14 +181,14 @@ public class Election: ObservableObject, Equatable {
         var elections = [election]
                 
         // Minimum number of votes for the last round
-        let half = voters.count / 2
+        let half = Double(voters.count) / 2.0
     
         while election.activeCandidates.count > 2 {
             // Check if 1st has > half -> it's the last round, break out
             let tally = election.pluralityTally()
             let head = tally.first!
             
-            let strictMajority = head.value >= half
+            let strictMajority = Double(head.value) >= half
             
             if strictMajority {
                 break
@@ -278,6 +278,13 @@ public struct Candidate: Entity, Hashable {
     
     public func distance(to: Entity) -> Double {
         distanceBetween(a: self, b: to)
+    }
+    
+    @available(iOS 17.0, *)
+    public func quote() -> Text {
+        Text(self.name)
+            .bold()
+            .foregroundStyle(self.color)
     }
     
 }
