@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-public func Block(_ inside: () -> some View) -> some View {
-    VStack {
-        inside()
+extension View {
+    func block() -> some View {
+        self
+            .padding(.bottom, 20)
     }
-    .padding(.vertical, 10)
 }

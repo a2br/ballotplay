@@ -18,6 +18,7 @@ struct RunoffPage: View {
         )
         
         ControlPanel()
+        Leaderboard()
     }
 }
 

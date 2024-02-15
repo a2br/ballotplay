@@ -17,7 +17,7 @@ struct CompassTip: Tip {
     }
     
     var message: Text? {
-        Text("The opinions of candidates & voters translate into their physical location on the board.")
+        Text("Move candidates around on the political compass, and voters will change colors.")
     }
     
     var image: Image? {

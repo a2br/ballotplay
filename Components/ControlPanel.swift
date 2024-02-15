@@ -29,10 +29,10 @@ struct ControlPanel: View {
             
             VStack {
                 Stepper("Number of candidates: \(election.candidateCount)", value: $election.candidateCount, in: 1...colorNames.count)
-                    .padding(20)
 
                 if (election.votingSystem == .runoff) {
                     Divider()
+                        .padding(.vertical, 10)
                     HStack {
                         Text("Round")
                         Spacer()
@@ -48,14 +48,13 @@ struct ControlPanel: View {
                         // WARN: Arbitrary number
                         .frame(maxWidth: 250)
                         .disabled(maxCount == 1)
-                        .padding(.horizontal)
                     }
-                    .padding()
 
                 }
                 
                 if (election.votingSystem == .approval) {
                     Divider()
+                        .padding(.vertical, 10)
                     HStack {
                         Text("Tolerance: \((election.tolerance / PRACTICAL_MAX_TOLERANCE) * 100, specifier: "%.0f")%")
                         Spacer()
@@ -64,12 +63,10 @@ struct ControlPanel: View {
                             in: 0.2...PRACTICAL_MAX_TOLERANCE
                         )
                         .frame(maxWidth: 250)
-                        .padding(.horizontal)
                     }
-                    .padding()
                 }
 
-            }
+            }.padding(20)
 
             
         }

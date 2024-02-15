@@ -15,6 +15,9 @@ struct ApprovalPage: View {
             Text("Approval Page")
         
             ControlPanel()
+        
+            Leaderboard()
+            .block()
     }
         
 }

@@ -30,6 +30,7 @@ struct GuideView: View {
                             case .approval:
                                 ApprovalPage()
                             }
+
                             Spacer()
                     }
                     .navigationTitle(pageNames[page]!)

@@ -30,12 +30,19 @@ struct PluralityPage: View {
                 Plurality voting is the most widely used voting system. It is hard to think of something more intuitive: “Just pick the candidate you like best.”
                 """
             )
-            
+            .block()
+        
+            Text(
+                """
+                Feel free to play around with this election. When you’re ready, let’s take a look at why it isn’t enough…
+                """
+            )
+            .block()
+
             ControlPanel()
             
-
-            
-            Text(election.pluralityTally().map { "\($0.key.name): \($0.value)" }.description)
+            Leaderboard()
+            .block()
 
     }
     

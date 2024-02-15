@@ -30,7 +30,6 @@ struct Compass: View {
     }
     
     var body: some View {
-//        let _ = Tips.showAllTipsForTesting()
         
         GeometryReader(content: { geo in
             ZStack {
