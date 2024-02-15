@@ -29,7 +29,7 @@ struct PluralityPage: View {
                             .padding(.bottom, 50)
                         
                         // Elements
-                        SheetElem(icon: "key", color: .orange, text: "Welcome to this app all about voting systems: a fascinating and powerful tool that decides who gets the key to a public office and who does not.")
+                        SheetElem(icon: "key", color: .orange, text: "Welcome to this app all about voting systems: a fascinating and powerful tool that decides who gets the key to public office and who does not.")
                         
                         SheetElem(icon: "lasso.badge.sparkles", color: .purple, text: "BallotPlay helps you understand their strengths and flaws by representing the political compass, where you can move candidates and see who people vote for through their color.")
                         
@@ -42,7 +42,7 @@ struct PluralityPage: View {
                         } label: {
                             ZStack {
                                 RoundedRectangle(cornerRadius: 10)
-                                    .fill(.blue)
+                                    .fill(Color.accentColor)
 
                                 Text("I'm ready!")
                                     .bold()

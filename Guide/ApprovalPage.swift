@@ -38,7 +38,7 @@ struct ApprovalPage: View {
         } label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(.blue)
+                    .fill(Color.accentColor)
                 
                 HStack {
                     Text("So, what's next?")
@@ -51,7 +51,28 @@ struct ApprovalPage: View {
             .padding(.horizontal, 0)
         }
         .sheet(isPresented: $whatsNext) {
-            Text("hi from whats next")
+            VStack {
+                Spacer()
+
+                Image(systemName: "globe.americas.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .padding(.bottom, 40)
+                    .foregroundColor(.accentColor)
+                
+                Text("So, what's next?")
+                    .bold()
+                    .font(.title)
+                    .padding(.bottom, 50)
+                
+                // Elements
+                SheetElem(icon: "scroll", color: .mint, text: "Advocacy for alternative voting is complex and may seem like a dead end: constitutions, often created to protect democracy, inherently block most updates to countries’ voting systems")
+                
+                SheetElem(icon: "gear.badge.questionmark", color: .indigo, text: "What even should we look for in our next voting system? Clarity and simple processes, like IRV or what Plurality already offers, or obscure algorithms with accurate outputs, such as the Condorcet Method?")
+                
+                
+            }
+            .padding(100)
         }
         
     }
