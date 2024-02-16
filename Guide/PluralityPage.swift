@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-var seenSheet = true
+var seenSheet = false
 
 @available(iOS 17.0, *)
 struct PluralityPage: View {
@@ -17,46 +17,6 @@ struct PluralityPage: View {
     @State private var showSheet: Bool = !seenSheet
     
     var body: some View {
-        
-            Rectangle()
-                .frame(width: 0, height: 0)
-                .sheet(isPresented: $showSheet, onDismiss: {
-                    seenSheet = true
-                    showSheet = false
-                }) {
-                    VStack {
-                        Text("Welcome to BallotPlay!")
-                            .bold()
-                            .font(.title)
-                            .padding(.bottom, 50)
-                        
-                        // Elements
-                        SheetElem(icon: "key", color: .orange, text: "Welcome to this app all about voting systems: a fascinating and powerful tool that decides who gets the key to public office and who does not.")
-                        
-                        SheetElem(icon: "lasso.badge.sparkles", color: .purple, text: "BallotPlay helps you understand their strengths and flaws by representing the political compass, where you can move candidates and see who people vote for through their color.")
-                        
-                        SheetElem(icon: "speaker.zzz.fill", color: .cyan, text: "My goal is to encourage public debate on this silent, but crucial issue at the heart of democracy. Enjoy!")
-                        
-
-                        Spacer()
-                        Button {
-                            showSheet = false
-                        } label: {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 10)
-                                    .fill(Color.accentColor)
-
-                                Text("I'm ready!")
-                                    .bold()
-                                    .foregroundStyle(.white)
-                                    .padding(20)
-                            }
-                            .frame(maxHeight: 50)
-                        }
-                    }
-                    .padding(100)
-
-                }
         
             VStack {
                 ControlPanel()
@@ -76,6 +36,46 @@ struct PluralityPage: View {
             )
         
         NextButton(page: $page)
+        
+        Rectangle()
+            .frame(width: 0, height: 0)
+            .sheet(isPresented: $showSheet, onDismiss: {
+                seenSheet = true
+                showSheet = false
+            }) {
+                VStack {
+                    Text("Welcome to BallotPlay!")
+                        .bold()
+                        .font(.title)
+                        .padding(.bottom, 50)
+                    
+                    // Elements
+                    SheetElem(icon: "key", color: .orange, text: "Welcome to this app all about voting systems: a fascinating and powerful tool that decides who gets the key to public office and who does not.")
+                    
+                    SheetElem(icon: "lasso.badge.sparkles", color: .purple, text: "BallotPlay helps you understand their strengths and flaws by representing the political compass, where you can move candidates and see who people vote for through their color.")
+                    
+                    SheetElem(icon: "speaker.zzz.fill", color: .cyan, text: "My goal is to encourage public debate on this silent, but crucial issue at the heart of democracy. Enjoy!")
+                    
+
+                    Spacer()
+                    Button {
+                        showSheet = false
+                    } label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.accentColor)
+
+                            Text("I'm ready!")
+                                .bold()
+                                .foregroundStyle(.white)
+                                .padding(20)
+                        }
+                        .frame(maxHeight: 50)
+                    }
+                }
+                .padding(100)
+
+            }
     
 
 

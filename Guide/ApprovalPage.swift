@@ -39,6 +39,8 @@ struct ApprovalPage: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color.accentColor)
+                    .shadow(color: .accentColor, radius: 80)
+
                 
                 HStack {
                     Text("So, what's next?")
@@ -47,8 +49,8 @@ struct ApprovalPage: View {
                         .padding(20)
                 }
             }
-            .padding(.vertical, 0)
-            .padding(.horizontal, 0)
+            .padding(.top, 20)
+            .padding(.horizontal, 100)
         }
         .sheet(isPresented: $whatsNext) {
             VStack {

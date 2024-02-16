@@ -16,12 +16,14 @@ struct GeneralView: View {
         GeometryReader { geo in
             
             HStack(spacing: 0) {
+                GuideView(page: $page)
+                    .environmentObject(election)
+                Divider()
                 CompassView()
                     .environmentObject(election)
                     .frame(width: geo.size.width / 2, height: geo.size.height)
-                Divider()
-                GuideView(page: $page)
-                    .environmentObject(election)
+                    .zIndex(-1.0)
+                
             }
         
         }
