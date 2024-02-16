@@ -8,6 +8,53 @@
 import SwiftUI
 
 
+struct NiceToolbar: ViewModifier {
+    @Binding var page: Page
+    
+    func body(content: Content) -> some View {
+        content.toolbar {
+            ToolbarItem(placement: .automatic) {
+                
+                Menu {
+                    PageSelectorSection(range: 0..<2, page: $page)
+                    PageSelectorSection(range: 2..<4, page: $page)
+                    PageSelector(p: Page.allCases[4], page: $page)
+                    
+                } label: {
+                    Image(systemName: "list.bullet")
+                }
+            }
+            ToolbarItem(placement: .automatic) {
+                HStack {
+                    
+                    let isFirst = page.rawValue == 0
+                    let isLast = page.rawValue == Page.allCases.count - 1
+                    
+                    Button {
+                        page = getPage(page, plus: -1)!
+                    } label: {
+                        Image(systemName: "chevron.backward")
+                    }.disabled(isFirst)
+                    
+                    Button {
+                        page = getPage(page, plus: +1)!
+                    } label: {
+                        Image(systemName: "chevron.forward")
+                    }.disabled(isLast)
+                }
+            }
+        }
+            
+        
+    }
+}
+
+extension ScrollView {
+    public func niceToolbar(page: Binding<Page>) -> some View {
+        modifier(NiceToolbar(page: page))
+    }
+}
+
 @available(iOS 17.0, *)
 struct GuideView: View {
     @Binding var page: Page
@@ -17,18 +64,18 @@ struct GuideView: View {
         NavigationStack {
             ScrollView {
                 HStack {
-                    VStack(alignment: .leading) {
+                    VStack(alignment: .leading, spacing: 20) {
                             switch page {
                             case .plurality:
-                                PluralityPage()
+                                PluralityPage(page: $page)
                             case .spoilerEffect:
-                                SpoilerPage()
+                                SpoilerPage(page: $page)
                             case .irv:
-                                RunoffPage()
+                                RunoffPage(page: $page)
                             case .centerSqueeze:
-                                CenterSqueezePage()
+                                CenterSqueezePage(page: $page)
                             case .approval:
-                                ApprovalPage()
+                                ApprovalPage(page: $page)
                             }
 
                             Spacer()
@@ -38,39 +85,7 @@ struct GuideView: View {
                     Spacer()
                 }
             }
-            .frame(maxWidth: .infinity)
-            .toolbar {
-                ToolbarItem(placement: .automatic) {
-                    
-                    Menu {
-                        PageSelectorSection(range: 0..<2, page: $page)
-                        PageSelectorSection(range: 2..<4, page: $page)
-                        PageSelector(p: Page.allCases[4], page: $page)
-                        
-                    } label: {
-                        Image(systemName: "list.bullet")
-                    }
-                }
-                ToolbarItem(placement: .automatic) {
-                    HStack {
-                        
-                        let isFirst = page.rawValue == 0
-                        let isLast = page.rawValue == Page.allCases.count - 1
-                        
-                        Button {
-                            page = getPage(page, plus: -1)!
-                        } label: {
-                            Image(systemName: "chevron.backward")
-                        }.disabled(isFirst)
-                        
-                        Button {
-                            page = getPage(page, plus: +1)!
-                        } label: {
-                            Image(systemName: "chevron.forward")
-                        }.disabled(isLast)
-                    }
-                }
-            }
+            .niceToolbar(page: $page)
         }
         .onChange(of: page) { old, new in
            

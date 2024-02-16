@@ -20,7 +20,7 @@ struct Callout: View {
                 .fill(color.opacity(0.25))
             
             HStack {
-                Image(systemName: "signpost.right.and.left.circle.fill")
+                Image(systemName: used ? "checkmark.circle" : "signpost.right.and.left.circle.fill")
                     .resizable()
                     .foregroundStyle(color)
                     .frame(width: 40, height: 40)
@@ -38,7 +38,7 @@ struct Callout: View {
             
         }
         .saturation(used ? 0.15 : 1)
-        .padding(.vertical, 30)
+        .padding(.vertical, 20)
     }
 }
 

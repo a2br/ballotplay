@@ -7,10 +7,12 @@
 
 import SwiftUI
 
-var seenSheet = false
+var seenSheet = true
 
 @available(iOS 17.0, *)
 struct PluralityPage: View {
+    @Binding var page: Page
+    
     @EnvironmentObject var election: Election
     @State private var showSheet: Bool = !seenSheet
     
@@ -56,22 +58,24 @@ struct PluralityPage: View {
 
                 }
         
-            ControlPanel()
-            Leaderboard()
+            VStack {
+                ControlPanel()
+                Leaderboard()
+            }
         
             Text(
                 """
                 Plurality voting is the most widely used voting system. It is hard to think of something more intuitive: “Just pick the candidate you like best.”
                 """
             )
-            .block()
         
             Text(
                 """
                 Feel free to play around with this election. When you’re ready, let’s take a look at why it may not be enough…
                 """
             )
-            .block()
+        
+        NextButton(page: $page)
     
 
 

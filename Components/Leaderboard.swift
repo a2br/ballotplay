@@ -23,7 +23,7 @@ struct Leaderboard: View {
                     .onTapGesture {
                         absoluteValues.toggle()
                     }
-
+                
                 VStack {
                     
                     // If approval or plurality, it's simple!
@@ -138,12 +138,12 @@ struct Leaderboard: View {
                             +
                             
                             (overHalf ?
-                                Text(" wins with \(Double(tally.first!.value) / Double(election.voters.count) * 100, specifier: "%.1f")% of votes.")
-                            : Text(" is eliminated."))
+                             Text(" wins with \(Double(tally.first!.value) / Double(election.voters.count) * 100, specifier: "%.1f")% of votes.")
+                             : Text(" is eliminated."))
                             
                         }
-                            .font(.footnote)
-                            .padding(.top, 15)
+                        .font(.footnote)
+                        .padding(.top, 15)
                     }
                 }
                 .padding(20)
@@ -159,12 +159,9 @@ struct Leaderboard: View {
                 Spacer()
             }
             
+            Divider()
+                .padding(.top, 10)
         }
-        .padding(.bottom, 20)
-        Divider()
-            .padding(.bottom, 20)
-
-
     }
 }
 

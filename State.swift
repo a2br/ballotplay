@@ -60,9 +60,9 @@ public let specialElections: [Page: Election] = [
     .centerSqueeze: Election(
         votingSystem: .runoff,
         candidates: [
-            Candidate(opinion: (-0.25, -0.25), name: sD[0].1, color: sD[0].0, locked: true),
-            Candidate(opinion: (0.2, 0.2), name: sD[1].1, color: sD[1].0, locked: true),
-            Candidate(opinion: (0.4, 0.4), name: sD[2].1, color: sD[2].0, locked: false)
+            Candidate(opinion: (-0.3, -0.3), name: sD[0].1, color: sD[0].0, locked: true),
+            Candidate(opinion: (0.1, 0.1), name: sD[1].1, color: sD[1].0, locked: true),
+            Candidate(opinion: (0.35, 0.35), name: sD[2].1, color: sD[2].0, locked: false)
         ]
     )
 ]

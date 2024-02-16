@@ -40,8 +40,6 @@ struct ControlPanel: View {
 
             }
             .padding(20)
-
-            
         }
         
     }

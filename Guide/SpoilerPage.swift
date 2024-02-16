@@ -13,6 +13,8 @@ let CHALLENGER_INDEX = 2
 
 @available(iOS 17.0, *)
 struct SpoilerPage: View {
+    @Binding var page: Page
+
     @EnvironmentObject var election: Election
     
     var body: some View {
@@ -44,13 +46,12 @@ struct SpoilerPage: View {
                 Group {
                     Text("Now, ") + legit.quote() + Text(" is losing to ") + enemy.quote() + Text("! Even though they'd beat ") + enemy.quote() + Text(" one-on-one, ") + challenger.quote() + Text(" \"stole\" some of her votes simply by having similar opinions.")
                 }
-                .block()
                 
                 Text("This is called the Spoiler Effect, the most criticized flaw of Plurality Voting.")
-                    .block()
                 
                 Text("As voters are encouraged to lie by voting for a more popular candidate (who might have more chances to win), a long-term consequence is the polarization of the political landscape. A great example would be the USA, which is governed by a two-party system.")
-                    .block()
+                
+                NextButton(page: $page)
             }
         }
     }
