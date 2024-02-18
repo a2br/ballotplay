@@ -37,7 +37,7 @@ struct NextButton: View {
             .frame(maxWidth: 250)
 
         }
-        .padding(.top, 40)
+        .padding(.top, 20)
     }
 }
 

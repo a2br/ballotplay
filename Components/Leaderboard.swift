@@ -38,7 +38,6 @@ struct Leaderboard: View {
                     if election.votingSystem == .runoff {
                         
                         let rounds = election.irvRounds()
-                        let round = rounds[election.round]
                         
                         let isFirst = election.round == 0
                         let isLast = election.round == rounds.count - 1
