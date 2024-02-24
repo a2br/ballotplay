@@ -59,18 +59,20 @@ struct ApprovalPage: View {
                 Image(systemName: "globe.americas.fill")
                     .resizable()
                     .scaledToFit()
-                    .padding(.bottom, 40)
+                    .padding(.bottom, 30)
                     .foregroundColor(.accentColor)
                 
                 Text("So, what's next?")
                     .bold()
                     .font(.title)
-                    .padding(.bottom, 50)
+                    .padding(.bottom, 30)
                 
                 // Elements
-                SheetElem(icon: "scroll", color: .mint, text: "Advocacy for alternative voting is complex and may seem like a dead end: constitutions, often created to protect democracy, inherently block most updates to countries’ voting systems")
+                SheetElem(icon: "scroll", color: .mint, text: "Advocacy for alternative voting is complex and may seem like a dead end: constitutions, often created to protect democracy, inherently block most updates to countries’ voting systems.")
                 
                 SheetElem(icon: "gear.badge.questionmark", color: .indigo, text: "What even should we look for in our next voting system? Clarity and simple processes, like IRV or what Plurality already offers, or obscure algorithms with accurate outputs, such as the Condorcet Method?")
+                
+                SheetElem(icon: "bubble.left.and.text.bubble.right", color: .orange, text: "I hope that next time you’re voting, you give a thought to the way your ballot is making your voice heard. The perfect system doesn’t exist. What about a better one?")
                 
                 
             }
