@@ -1,78 +1,78 @@
-Optional(Attributes: Application, 0x105df8030, pid: 11760, label: 'BallotPlay'
+Optional(Attributes: Application, 0x1034d5f80, pid: 11549, label: 'BallotPlay'
 Element subtree:
- →Application, 0x105df8030, pid: 11760, label: 'BallotPlay'
-    Window (Main), 0x105df5560, {{0.0, 0.0}, {1376.0, 1032.0}}
-      Other, 0x105df8b30, {{0.0, 0.0}, {1376.0, 1032.0}}
-        Other, 0x105df8c50, {{0.0, 0.0}, {1376.0, 1032.0}}
-          Other, 0x105df89e0, {{0.0, 0.0}, {1376.0, 1032.0}}
-            Other, 0x105ded620, {{0.0, 0.0}, {1376.0, 1032.0}}
-              Other, 0x105df91f0, {{0.0, 0.0}, {1376.0, 1032.0}}
-                StaticText, 0x105df8d70, {{713.0, 263.4}, {490.0, 84.0}}, label: 'Graham Green is winning with Approval Voting.'
-                Other, 0x105df8e90, {{713.0, 369.0}, {638.0, 638.0}}, identifier: 'compass'
-                Other, 0x105df8fb0, {{832.5, 518.5}, {40.0, 40.0}}, identifier: 'candidate-Phoebe Purple', label: 'Phoebe Purple'
-                Other, 0x105df90d0, {{832.5, 787.5}, {40.0, 40.0}}, identifier: 'candidate-Chloe Cyan', label: 'Chloe Cyan'
-                Other, 0x105df9310, {{1161.5, 757.5}, {40.0, 40.0}}, identifier: 'candidate-Robert Red', label: 'Robert Red'
-                Other, 0x105df9430, {{967.0, 638.0}, {40.0, 40.0}}, identifier: 'candidate-Graham Green', label: 'Graham Green'
-                Other, 0x105df9550, {{0.0, 0.0}, {687.5, 1032.0}}
-                  NavigationBar, 0x105df9670, {{0.0, 24.0}, {687.5, 102.0}}, identifier: 'An Outlier: Approval Voting'
-                    Other, 0x105df9790, {{561.0, 35.5}, {42.5, 27.5}}, label: 'List'
-                      Other, 0x105df98b0, {{561.0, 35.5}, {42.5, 27.5}}
-                        Button, 0x105df99d0, {{561.0, 35.5}, {42.5, 27.5}}, label: 'List'
-                          Button, 0x105df9af0, {{561.0, 35.5}, {42.5, 27.5}}
-                            Other, 0x105df9c10, {{561.0, 35.5}, {42.5, 27.5}}
-                              Image, 0x105df9d30, {{561.0, 35.5}, {42.5, 27.5}}, identifier: 'list.bullet', label: 'List'
-                    Other, 0x105df9e50, {{611.5, 34.0}, {56.0, 30.5}}, identifier: 'chevron.backward', label: 'Back'
-                      Other, 0x105df9f70, {{611.5, 34.0}, {56.0, 30.5}}
-                        Button, 0x105dfa090, {{611.5, 34.0}, {24.0, 30.5}}, identifier: 'chevron.backward', label: 'Back'
-                        Button, 0x105dfa1b0, {{643.5, 34.0}, {24.0, 30.5}}, identifier: 'chevron.forward', label: 'Forward', Disabled
-                    StaticText, 0x105dfa2d0, {{20.0, 77.5}, {426.0, 41.0}}, label: 'An Outlier: Approval Voting'
-                  Other, 0x105dfa3f0, {{0.0, 0.0}, {687.5, 1032.0}}
-                    Other, 0x105dfa510, {{0.0, 0.0}, {687.5, 1032.0}}
-                      Other, 0x105dfa630, {{0.0, 0.0}, {687.5, 1032.0}}
-                        Other, 0x105dfa750, {{0.0, 0.0}, {687.5, 1032.0}}
-                          ScrollView, 0x105dfa870, {{0.0, 0.0}, {687.5, 1032.0}}
-                            Other, 0x105dfa990, {{0.0, 126.0}, {687.5, 789.5}}
-                              Stepper, 0x105dfaab0, {{50.0, 176.0}, {579.5, 32.0}}, label: 'Number of candidates: 4', value: 4
-                                Other, 0x11a606fa0, {{535.5, 176.0}, {94.0, 32.0}}
-                                  Image, 0x11a607a20, {{535.5, 176.0}, {46.5, 32.0}}
-                                  Button, 0x11a607b40, {{535.5, 176.0}, {46.5, 32.0}}, identifier: 'Decrement', label: 'Number of candidates: 4, Decrement', value: 4
-                                  Image, 0x11a607c60, {{582.0, 176.0}, {1.0, 32.0}}
-                                    Image, 0x11a607d80, {{582.0, 176.0}, {1.0, 32.0}}
-                                  Image, 0x11a607ea0, {{583.0, 176.0}, {46.5, 32.0}}
-                                  Button, 0x11a607fc0, {{583.0, 176.0}, {46.5, 32.0}}, identifier: 'Increment', label: 'Number of candidates: 4, Increment', value: 4
-                              StaticText, 0x11a6080e0, {{50.0, 248.4}, {119.5, 20.5}}, label: 'Tolerance: 56%'
-                              Slider, 0x11a608200, {{379.5, 243.0}, {250.0, 31.0}}, value: 0.8
-                              StaticText, 0x11a608320, {{50.0, 322.1}, {11.0, 20.5}}, label: '#'
-                              StaticText, 0x11a608440, {{89.0, 322.1}, {95.0, 20.5}}, label: 'Candidate'
-                              StaticText, 0x11a608560, {{513.5, 322.1}, {116.0, 20.5}}, label: '% approvals'
-                              StaticText, 0x11a608680, {{50.0, 359.2}, {7.5, 20.5}}, label: '1'
-                              StaticText, 0x11a6087a0, {{85.5, 359.2}, {111.0, 20.5}}, label: 'Graham Green'
-                              StaticText, 0x11a6088c0, {{576.5, 359.2}, {53.0, 20.5}}, label: '44.6%'
-                              StaticText, 0x11a6089e0, {{50.0, 381.7}, {10.0, 20.5}}, label: '2'
-                              StaticText, 0x11a608b00, {{88.0, 381.7}, {85.5, 20.5}}, label: 'Robert Red'
-                              StaticText, 0x11a608c20, {{576.5, 381.7}, {53.0, 20.5}}, label: '40.5%'
-                              StaticText, 0x11a608d40, {{50.0, 404.2}, {10.5, 20.5}}, label: '3'
-                              StaticText, 0x11a608e60, {{88.5, 404.2}, {87.5, 20.5}}, label: 'Chloe Cyan'
-                              StaticText, 0x11a608f80, {{576.5, 404.2}, {53.0, 20.5}}, label: '36.0%'
-                              StaticText, 0x11a6090a0, {{50.0, 426.7}, {11.0, 20.5}}, label: '4'
-                              StaticText, 0x11a6091c0, {{89.0, 426.7}, {112.0, 20.5}}, label: 'Phoebe Purple'
-                              StaticText, 0x11a6092e0, {{576.5, 426.7}, {53.0, 20.5}}, label: '34.3%'
-                              Image, 0x11a609400, {{31.0, 474.0}, {13.0, 13.0}}, identifier: 'info.circle', label: 'Info'
-                              StaticText, 0x11a609520, {{53.0, 472.3}, {436.0, 16.0}}, label: 'Tap on the leaderboard to switch between relative and absolute metrics.'
-                              StaticText, 0x11a609640, {{30.0, 527.2}, {606.0, 42.5}}, label: 'Kenneth Arrow (our math guy) once said no voting system where you must give an order of preference will ever be perfect: this is Arrow’s Theorem.'
-                              StaticText, 0x11a6098a0, {{30.0, 589.7}, {602.5, 42.5}}, label: 'Approval Voting is a strange one —voters just tick candidates off, or they don’t. Surprisingly, it works pretty well.'
-                              StaticText, 0x11a609ad0, {{30.0, 652.2}, {612.0, 64.5}}, label: 'However, it is often criticized for its poor feasibility. What is keeping you from transforming this into a fancy Plurality election? Everyone would just have to tick only one box, and we’d be back to square one!'
-                              StaticText, 0x11a609db0, {{30.0, 736.7}, {400.0, 20.5}}, label: 'For some reason, this is called the Chicken Dilemma.'
-                              Button, 0x11a609ed0, {{30.0, 777.0}, {619.5, 80.5}}, label: 'So, what's next?'
-                            Other, 0x11a60a1f0, {{654.5, 74.0}, {30.0, 958.0}}, label: 'Vertical scroll bar, 1 page', value: 0%
-                              Other, 0x11a60a310, {{681.5, 168.5}, {3.0, 860.5}}
-                            Other, 0x11a60a430, {{654.5, 74.0}, {30.0, 958.0}}, label: 'Vertical scroll bar, 1 page', value: 0%
-                              Other, 0x11a60a550, {{681.5, 168.5}, {3.0, 860.5}}
+ →Application, 0x1034d5f80, pid: 11549, label: 'BallotPlay'
+    Window (Main), 0x1034d4ea0, {{0.0, 0.0}, {1180.0, 820.0}}
+      Other, 0x1034b8fa0, {{0.0, 0.0}, {1180.0, 820.0}}
+        Other, 0x1034d5b60, {{0.0, 0.0}, {1180.0, 820.0}}
+          Other, 0x1034b93c0, {{0.0, 0.0}, {1180.0, 820.0}}
+            Other, 0x1034b97e0, {{0.0, 0.0}, {1180.0, 820.0}}
+              Other, 0x1034d5740, {{0.0, 0.0}, {1180.0, 820.0}}
+                StaticText, 0x1034d1e20, {{615.0, 149.4}, {500.5, 84.0}}, label: 'Charlotte Cyan is winning with Approval Voting.'
+                Other, 0x1034d1f40, {{615.0, 255.0}, {540.0, 540.0}}, identifier: 'compass'
+                Other, 0x1034d2060, {{715.0, 380.0}, {40.0, 40.0}}, identifier: 'candidate-Patrick Purple', label: 'Patrick Purple'
+                Other, 0x1034d2180, {{715.0, 605.0}, {40.0, 40.0}}, identifier: 'candidate-Raphael Red', label: 'Raphael Red'
+                Other, 0x1034d22a0, {{990.0, 580.0}, {40.0, 40.0}}, identifier: 'candidate-Giovanni Green', label: 'Giovanni Green'
+                Other, 0x1034d23c0, {{827.5, 480.0}, {40.0, 40.0}}, identifier: 'candidate-Charlotte Cyan', label: 'Charlotte Cyan'
+                Other, 0x1034d24e0, {{0.0, 0.0}, {589.5, 820.0}}
+                  NavigationBar, 0x1034d2600, {{0.0, 24.0}, {589.5, 102.0}}, identifier: 'An Outlier: Approval Voting'
+                    Other, 0x1034d6240, {{463.0, 35.5}, {42.5, 27.5}}, label: 'List'
+                      Other, 0x1034d6360, {{463.0, 35.5}, {42.5, 27.5}}
+                        Button, 0x1034d6480, {{463.0, 35.5}, {42.5, 27.5}}, label: 'List'
+                          Button, 0x1034d65a0, {{463.0, 35.5}, {42.5, 27.5}}
+                            Other, 0x1034d66c0, {{463.0, 35.5}, {42.5, 27.5}}
+                              Image, 0x1034d67e0, {{463.0, 35.5}, {42.5, 27.5}}, identifier: 'list.bullet', label: 'List'
+                    Other, 0x1034d6900, {{513.5, 34.0}, {56.0, 30.5}}, identifier: 'chevron.backward', label: 'Back'
+                      Other, 0x1034d6a20, {{513.5, 34.0}, {56.0, 30.5}}
+                        Button, 0x1034d6b40, {{513.5, 34.0}, {24.0, 30.5}}, identifier: 'chevron.backward', label: 'Back'
+                        Button, 0x1034d6c60, {{545.5, 34.0}, {24.0, 30.5}}, identifier: 'chevron.forward', label: 'Forward', Disabled
+                    StaticText, 0x1034d6d80, {{20.0, 77.5}, {426.0, 41.0}}, label: 'An Outlier: Approval Voting'
+                  Other, 0x1034d6ea0, {{0.0, 0.0}, {589.5, 820.0}}
+                    Other, 0x1034d6fc0, {{0.0, 0.0}, {589.5, 820.0}}
+                      Other, 0x1034d70e0, {{0.0, 0.0}, {589.5, 820.0}}
+                        Other, 0x1034d7200, {{0.0, 0.0}, {589.5, 820.0}}
+                          ScrollView, 0x1034d7320, {{0.0, 0.0}, {589.5, 820.0}}
+                            Other, 0x1034d7440, {{0.0, 126.0}, {589.5, 833.5}}
+                              Stepper, 0x1034d7560, {{50.0, 176.0}, {481.5, 32.0}}, label: 'Number of candidates: 4', value: 4
+                                Other, 0x1034d7680, {{437.5, 176.0}, {94.0, 32.0}}
+                                  Image, 0x1034b9ce0, {{437.5, 176.0}, {46.5, 32.0}}
+                                  Button, 0x1034b9e00, {{437.5, 176.0}, {46.5, 32.0}}, identifier: 'Decrement', label: 'Number of candidates: 4, Decrement', value: 4
+                                  Image, 0x1034b9f20, {{484.0, 176.0}, {1.0, 32.0}}
+                                    Image, 0x1034ba040, {{484.0, 176.0}, {1.0, 32.0}}
+                                  Image, 0x1034ba160, {{485.0, 176.0}, {46.5, 32.0}}
+                                  Button, 0x1034ba280, {{485.0, 176.0}, {46.5, 32.0}}, identifier: 'Increment', label: 'Number of candidates: 4, Increment', value: 4
+                              StaticText, 0x1034ba3a0, {{50.0, 248.4}, {119.5, 20.5}}, label: 'Tolerance: 56%'
+                              Slider, 0x1034ba4c0, {{281.5, 243.0}, {250.0, 31.0}}, value: 0.8
+                              StaticText, 0x1034ba5e0, {{50.0, 322.1}, {11.0, 20.5}}, label: '#'
+                              StaticText, 0x1034ba700, {{89.0, 322.1}, {95.0, 20.5}}, label: 'Candidate'
+                              StaticText, 0x1034ba820, {{415.5, 322.1}, {116.0, 20.5}}, label: '% approvals'
+                              StaticText, 0x1034ba940, {{50.0, 359.2}, {7.5, 20.5}}, label: '1'
+                              StaticText, 0x1034baa60, {{85.5, 359.2}, {113.5, 20.5}}, label: 'Charlotte Cyan'
+                              StaticText, 0x1034bab80, {{478.5, 359.2}, {53.0, 20.5}}, label: '44.6%'
+                              StaticText, 0x1034baca0, {{50.0, 381.7}, {10.0, 20.5}}, label: '2'
+                              StaticText, 0x1034badc0, {{88.0, 381.7}, {116.0, 20.5}}, label: 'Giovanni Green'
+                              StaticText, 0x1034baee0, {{478.5, 381.7}, {53.0, 20.5}}, label: '40.1%'
+                              StaticText, 0x1034bb000, {{50.0, 404.2}, {10.5, 20.5}}, label: '3'
+                              StaticText, 0x1034bb120, {{88.5, 404.2}, {95.5, 20.5}}, label: 'Raphael Red'
+                              StaticText, 0x1034bb240, {{478.5, 404.2}, {53.0, 20.5}}, label: '36.0%'
+                              StaticText, 0x1034fab40, {{50.0, 426.7}, {11.0, 20.5}}, label: '4'
+                              StaticText, 0x1034fac60, {{89.0, 426.7}, {106.0, 20.5}}, label: 'Patrick Purple'
+                              StaticText, 0x1034fad80, {{478.5, 426.7}, {53.0, 20.5}}, label: '34.3%'
+                              Image, 0x1034faea0, {{31.0, 474.0}, {13.0, 13.0}}, identifier: 'info.circle', label: 'Info'
+                              StaticText, 0x1034fafc0, {{53.0, 472.3}, {436.0, 16.0}}, label: 'Tap on the leaderboard to switch between relative and absolute metrics.'
+                              StaticText, 0x1034fb0e0, {{30.0, 527.2}, {496.0, 64.5}}, label: 'Kenneth Arrow (our math guy) once said no voting system where you must give an order of preference will ever be perfect: this is Arrow’s Theorem.'
+                              StaticText, 0x1034fb340, {{30.0, 611.7}, {516.5, 42.5}}, label: 'Approval Voting is a strange one —voters just tick candidates off, or they don’t. Surprisingly, it works pretty well.'
+                              StaticText, 0x115f0a290, {{30.0, 674.2}, {515.0, 86.5}}, label: 'However, it is often criticized for its poor feasibility. What is keeping you from transforming this into a fancy Plurality election? Everyone would just have to tick only one box, and we’d be back to square one!'
+                              StaticText, 0x115f0a570, {{30.0, 780.7}, {400.0, 20.5}}, label: 'For some reason, this is called the Chicken Dilemma.'
+                              Button, 0x115f0a690, {{30.0, 821.0}, {521.5, 80.5}}, label: 'So, what's next?'
+                            Other, 0x115f0a9b0, {{556.5, 74.0}, {30.0, 746.0}}, label: 'Vertical scroll bar, 2 pages', value: 0%
+                              Other, 0x115f0aad0, {{583.5, 77.0}, {3.0, 616.5}}
+                            Other, 0x115f0abf0, {{556.5, 74.0}, {30.0, 746.0}}, label: 'Vertical scroll bar, 2 pages', value: 0%
+                              Other, 0x115f0ad10, {{583.5, 77.0}, {3.0, 616.5}}
 Path to element:
- →Application, 0x105df8030, pid: 11760, label: 'BallotPlay'
+ →Application, 0x1034d5f80, pid: 11549, label: 'BallotPlay'
 Query chain:
  →Find: Target Application 'dbr.BallotPlay'
   Output: {
-    Application, 0x105dd7610, pid: 11760, label: 'BallotPlay'
+    Application, 0x103656100, pid: 11549, label: 'BallotPlay'
   }
 )

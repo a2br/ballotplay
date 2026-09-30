@@ -1,88 +1,88 @@
-Optional(Attributes: Application, 0x105c10a00, pid: 11760, label: 'BallotPlay'
+Optional(Attributes: Application, 0x103471d10, pid: 11549, label: 'BallotPlay'
 Element subtree:
- →Application, 0x105c10a00, pid: 11760, label: 'BallotPlay'
-    Window (Main), 0x105c59db0, {{0.0, 0.0}, {1376.0, 1032.0}}
-      Other, 0x105c61930, {{0.0, 0.0}, {1376.0, 1032.0}}
-        Other, 0x105c61510, {{0.0, 0.0}, {1376.0, 1032.0}}
-          Other, 0x105c61d50, {{0.0, 0.0}, {1376.0, 1032.0}}
-            Other, 0x105c62390, {{0.0, 0.0}, {1376.0, 1032.0}}
-              Other, 0x105c610f0, {{0.0, 0.0}, {1376.0, 1032.0}}
-                StaticText, 0x105c5d5a0, {{713.0, 224.9}, {585.5, 84.0}}, label: 'Robert Red is winning with IRV after 2 rounds.'
-                StaticText, 0x105c5af30, {{994.2, 335.5}, {75.5, 20.5}}, label: 'Round 1/2'
-                Button, 0x105c95920, {{713.0, 335.5}, {86.0, 20.5}}, label: 'Previous', Disabled
-                  Image, 0x105c629d0, {{714.0, 338.5}, {8.5, 14.5}}, identifier: 'chevron.backward', label: 'Back', Disabled
-                  StaticText, 0x105c62af0, {{733.5, 335.5}, {65.5, 20.5}}, label: 'Previous', Disabled
-                Button, 0x105c62c10, {{1295.0, 335.5}, {56.0, 20.5}}, label: 'Next'
-                  StaticText, 0x105c62d30, {{1295.0, 335.5}, {35.5, 20.5}}, label: 'Next'
-                  Image, 0x105c62e50, {{1341.5, 338.5}, {8.5, 14.5}}, identifier: 'chevron.forward', label: 'Forward'
-                Other, 0x105c62f70, {{713.0, 369.0}, {638.0, 638.0}}, identifier: 'compass'
-                Other, 0x105c63090, {{847.5, 533.5}, {40.0, 40.0}}, identifier: 'candidate-Phoebe Purple', label: 'Phoebe Purple'
-                Other, 0x105c632d0, {{1176.5, 533.5}, {40.0, 40.0}}, identifier: 'candidate-Chloe Cyan', label: 'Chloe Cyan'
-                Other, 0x105c633f0, {{1012.0, 683.0}, {40.0, 40.0}}, identifier: 'candidate-Robert Red', label: 'Robert Red'
-                Other, 0x105c63510, {{0.0, 0.0}, {687.5, 1032.0}}
-                  NavigationBar, 0x105c63630, {{0.0, 24.0}, {687.5, 102.0}}, identifier: 'An Alternative: Instant Runoff'
-                    Other, 0x105c63750, {{561.0, 35.5}, {42.5, 27.5}}, label: 'List'
-                      Other, 0x105c63870, {{561.0, 35.5}, {42.5, 27.5}}
-                        Button, 0x105c63990, {{561.0, 35.5}, {42.5, 27.5}}, label: 'List'
-                          Button, 0x105c63ab0, {{561.0, 35.5}, {42.5, 27.5}}
-                            Other, 0x105c63bd0, {{561.0, 35.5}, {42.5, 27.5}}
-                              Image, 0x105c63cf0, {{561.0, 35.5}, {42.5, 27.5}}, identifier: 'list.bullet', label: 'List'
-                    Other, 0x105c63e10, {{611.5, 34.0}, {56.0, 30.5}}, identifier: 'chevron.backward', label: 'Back'
-                      Other, 0x105c63f30, {{611.5, 34.0}, {56.0, 30.5}}
-                        Button, 0x105c64050, {{611.5, 34.0}, {24.0, 30.5}}, identifier: 'chevron.backward', label: 'Back'
-                        Button, 0x105c64170, {{643.5, 34.0}, {24.0, 30.5}}, identifier: 'chevron.forward', label: 'Forward'
-                    StaticText, 0x105c64290, {{20.0, 77.5}, {465.5, 41.0}}, label: 'An Alternative: Instant Runoff'
-                  Other, 0x105c643b0, {{0.0, 0.0}, {687.5, 1032.0}}
-                    Other, 0x105c644d0, {{0.0, 0.0}, {687.5, 1032.0}}
-                      Other, 0x105c645f0, {{0.0, 0.0}, {687.5, 1032.0}}
-                        Other, 0x105c64710, {{0.0, 0.0}, {687.5, 1032.0}}
-                          ScrollView, 0x105c64830, {{0.0, 0.0}, {687.5, 1032.0}}
-                            Other, 0x105c64950, {{0.0, 126.0}, {687.5, 761.0}}
-                              Stepper, 0x105c64a70, {{50.0, 176.0}, {579.5, 32.0}}, label: 'Number of candidates: 3', value: 3
-                                Other, 0x105c64b90, {{535.5, 176.0}, {94.0, 32.0}}
-                                  Image, 0x105c64cb0, {{535.5, 176.0}, {46.5, 32.0}}
-                                  Button, 0x105c64dd0, {{535.5, 176.0}, {46.5, 32.0}}, identifier: 'Decrement', label: 'Number of candidates: 3, Decrement', value: 3
-                                  Image, 0x105c64ef0, {{582.0, 176.0}, {1.0, 32.0}}
-                                    Image, 0x105c65010, {{582.0, 176.0}, {1.0, 32.0}}
-                                  Image, 0x105c65130, {{583.0, 176.0}, {46.5, 32.0}}
-                                  Button, 0x105c65250, {{583.0, 176.0}, {46.5, 32.0}}, identifier: 'Increment', label: 'Number of candidates: 3, Increment', value: 3
-                              Button, 0x105c65370, {{50.0, 256.0}, {86.0, 20.5}}, label: 'Previous', Disabled
-                                Image, 0x105c65490, {{51.0, 259.0}, {8.5, 14.5}}, identifier: 'chevron.backward', label: 'Back', Disabled
-                                StaticText, 0x105c655b0, {{70.5, 256.0}, {65.5, 20.5}}, label: 'Previous', Disabled
-                              StaticText, 0x105d87620, {{309.2, 256.0}, {61.0, 20.5}}, label: 'Round 1'
-                              Button, 0x105d87aa0, {{573.5, 256.0}, {56.0, 20.5}}, label: 'Next'
-                                StaticText, 0x105d87ec0, {{573.5, 256.0}, {35.5, 20.5}}, label: 'Next'
-                                Image, 0x105d88cb0, {{620.0, 259.0}, {8.5, 14.5}}, identifier: 'chevron.forward', label: 'Forward'
-                              StaticText, 0x105d88dd0, {{50.0, 314.4}, {11.0, 20.5}}, label: '#'
-                              StaticText, 0x105d88ef0, {{89.0, 314.4}, {95.0, 20.5}}, label: 'Candidate'
-                              StaticText, 0x105d89010, {{555.5, 314.4}, {74.0, 20.5}}, label: '% votes'
-                              StaticText, 0x105d89130, {{50.0, 351.5}, {7.5, 20.5}}, label: '1'
-                              StaticText, 0x105d89250, {{85.5, 351.5}, {85.5, 20.5}}, label: 'Robert Red'
-                              StaticText, 0x105d89370, {{576.5, 351.5}, {53.0, 20.5}}, label: '46.0%'
-                              StaticText, 0x105d89490, {{50.0, 374.0}, {10.0, 20.5}}, label: '2'
-                              StaticText, 0x105d895b0, {{88.0, 374.0}, {87.5, 20.5}}, label: 'Chloe Cyan'
-                              StaticText, 0x105d896d0, {{576.5, 374.0}, {53.0, 20.5}}, label: '27.7%'
-                              StaticText, 0x105d897f0, {{50.0, 396.5}, {10.5, 20.5}}, label: '3'
-                              StaticText, 0x105d89910, {{88.5, 396.5}, {112.0, 20.5}}, label: 'Phoebe Purple'
-                              StaticText, 0x105d89a30, {{576.5, 396.5}, {53.0, 20.5}}, label: '26.3%'
-                              StaticText, 0x105d89b50, {{252.0, 442.8}, {175.5, 16.0}}, label: 'Phoebe Purple is eliminated.'
-                              Image, 0x105d89c70, {{31.0, 485.5}, {13.0, 13.0}}, identifier: 'info.circle', label: 'Info'
-                              StaticText, 0x105d89d90, {{53.0, 484.0}, {436.0, 16.0}}, label: 'Tap on the leaderboard to switch between relative and absolute metrics.'
-                              StaticText, 0x105d89eb0, {{30.0, 538.8}, {611.5, 64.5}}, label: 'We just saw that with Plurality Voting, it’s sometimes in your best interest to lie… So, what if you had fallbacks to your ballot? If your favorite candidate doesn’t stand a chance, then your ballot picks your 2nd favorite!'
-                              StaticText, 0x105d8a1b0, {{30.0, 623.3}, {619.5, 64.5}}, label: 'That’s the entire premise of Instant Runoff Voting (IRV). A simpler way to visualize it would be by using multiple election rounds, eliminating the weakest candidate each time & stopping whenever someone gains over 50% of the votes.'
-                              StaticText, 0x105d8a4c0, {{30.0, 707.8}, {210.0, 20.5}}, label: 'Of course, there's a catch.'
-                              Button, 0x105d8a5e0, {{399.5, 768.5}, {250.0, 60.5}}, label: 'How so?'
-                                StaticText, 0x105d8a700, {{479.8, 788.4}, {67.5, 20.5}}, label: 'How so?'
-                                Image, 0x105d8a820, {{559.0, 791.0}, {9.5, 15.5}}, identifier: 'chevron.forward', label: 'Forward'
-                            Other, 0x105d8a940, {{654.5, 74.0}, {30.0, 958.0}}, label: 'Vertical scroll bar, 1 page', value: 0%
-                              Other, 0x105d8aa60, {{681.5, 197.0}, {3.0, 832.0}}
-                            Other, 0x105d8ab80, {{654.5, 74.0}, {30.0, 958.0}}, label: 'Vertical scroll bar, 1 page', value: 0%
-                              Other, 0x105d8aca0, {{681.5, 197.0}, {3.0, 832.0}}
+ →Application, 0x103471d10, pid: 11549, label: 'BallotPlay'
+    Window (Main), 0x103655d80, {{0.0, 0.0}, {1180.0, 820.0}}
+      Other, 0x103656100, {{0.0, 0.0}, {1180.0, 820.0}}
+        Other, 0x103656b10, {{0.0, 0.0}, {1180.0, 820.0}}
+          Other, 0x103656460, {{0.0, 0.0}, {1180.0, 820.0}}
+            Other, 0x103655a20, {{0.0, 0.0}, {1180.0, 820.0}}
+              Other, 0x103656e90, {{0.0, 0.0}, {1180.0, 820.0}}
+                StaticText, 0x103657210, {{615.0, 110.9}, {503.5, 84.0}}, label: 'Giovanni Green is winning with IRV after 2 rounds.'
+                StaticText, 0x103657fb0, {{847.2, 221.5}, {75.5, 20.5}}, label: 'Round 1/2'
+                Button, 0x103658310, {{615.0, 221.5}, {86.0, 20.5}}, label: 'Previous', Disabled
+                  Image, 0x103657c50, {{616.0, 224.5}, {8.5, 14.5}}, identifier: 'chevron.backward', label: 'Back', Disabled
+                  StaticText, 0x1036578f0, {{635.5, 221.5}, {65.5, 20.5}}, label: 'Previous', Disabled
+                Button, 0x103657580, {{1099.0, 221.5}, {56.0, 20.5}}, label: 'Next'
+                  StaticText, 0x103658da0, {{1099.0, 221.5}, {35.5, 20.5}}, label: 'Next'
+                  Image, 0x103658a10, {{1145.5, 224.5}, {8.5, 14.5}}, identifier: 'chevron.forward', label: 'Forward'
+                Other, 0x103658690, {{615.0, 255.0}, {540.0, 540.0}}, identifier: 'compass'
+                Other, 0x1036590f0, {{727.5, 392.5}, {40.0, 40.0}}, identifier: 'candidate-Patrick Purple', label: 'Patrick Purple'
+                Other, 0x103659480, {{1002.5, 392.5}, {40.0, 40.0}}, identifier: 'candidate-Raphael Red', label: 'Raphael Red'
+                Other, 0x103659b60, {{865.0, 517.5}, {40.0, 40.0}}, identifier: 'candidate-Giovanni Green', label: 'Giovanni Green'
+                Other, 0x1036597f0, {{0.0, 0.0}, {589.5, 820.0}}
+                  NavigationBar, 0x103659ea0, {{0.0, 24.0}, {589.5, 102.0}}, identifier: 'An Alternative: Instant Runoff'
+                    Other, 0x10365a210, {{463.0, 35.5}, {42.5, 27.5}}, label: 'List'
+                      Other, 0x10365a8f0, {{463.0, 35.5}, {42.5, 27.5}}
+                        Button, 0x10365a580, {{463.0, 35.5}, {42.5, 27.5}}, label: 'List'
+                          Button, 0x10365ac50, {{463.0, 35.5}, {42.5, 27.5}}
+                            Other, 0x10365afa0, {{463.0, 35.5}, {42.5, 27.5}}
+                              Image, 0x10365b300, {{463.0, 35.5}, {42.5, 27.5}}, identifier: 'list.bullet', label: 'List'
+                    Other, 0x10365b9f0, {{513.5, 34.0}, {56.0, 30.5}}, identifier: 'chevron.backward', label: 'Back'
+                      Other, 0x10365b660, {{513.5, 34.0}, {56.0, 30.5}}
+                        Button, 0x10365bd40, {{513.5, 34.0}, {24.0, 30.5}}, identifier: 'chevron.backward', label: 'Back'
+                        Button, 0x10365c0c0, {{545.5, 34.0}, {24.0, 30.5}}, identifier: 'chevron.forward', label: 'Forward'
+                    StaticText, 0x10365c440, {{20.0, 77.5}, {465.5, 41.0}}, label: 'An Alternative: Instant Runoff'
+                  Other, 0x10365caf0, {{0.0, 0.0}, {589.5, 820.0}}
+                    Other, 0x10361dd40, {{0.0, 0.0}, {589.5, 820.0}}
+                      Other, 0x10365c7a0, {{0.0, 0.0}, {589.5, 820.0}}
+                        Other, 0x10365ce70, {{0.0, 0.0}, {589.5, 820.0}}
+                          ScrollView, 0x10365d6a0, {{0.0, 0.0}, {589.5, 820.0}}
+                            Other, 0x10365da30, {{0.0, 126.0}, {589.5, 805.0}}
+                              Stepper, 0x103621370, {{50.0, 176.0}, {481.5, 32.0}}, label: 'Number of candidates: 3', value: 3
+                                Other, 0x103622990, {{437.5, 176.0}, {94.0, 32.0}}
+                                  Image, 0x10365dfb0, {{437.5, 176.0}, {46.5, 32.0}}
+                                  Button, 0x10365e340, {{437.5, 176.0}, {46.5, 32.0}}, identifier: 'Decrement', label: 'Number of candidates: 3, Decrement', value: 3
+                                  Image, 0x10365e6e0, {{484.0, 176.0}, {1.0, 32.0}}
+                                    Image, 0x10365ea40, {{484.0, 176.0}, {1.0, 32.0}}
+                                  Image, 0x10365edc0, {{485.0, 176.0}, {46.5, 32.0}}
+                                  Button, 0x10365f140, {{485.0, 176.0}, {46.5, 32.0}}, identifier: 'Increment', label: 'Number of candidates: 3, Increment', value: 3
+                              Button, 0x10365f4a0, {{50.0, 256.0}, {86.0, 20.5}}, label: 'Previous', Disabled
+                                Image, 0x10365f810, {{51.0, 259.0}, {8.5, 14.5}}, identifier: 'chevron.backward', label: 'Back', Disabled
+                                StaticText, 0x10365fb70, {{70.5, 256.0}, {65.5, 20.5}}, label: 'Previous', Disabled
+                              StaticText, 0x10365fee0, {{260.2, 256.0}, {61.0, 20.5}}, label: 'Round 1'
+                              Button, 0x103660280, {{475.5, 256.0}, {56.0, 20.5}}, label: 'Next'
+                                StaticText, 0x1036605e0, {{475.5, 256.0}, {35.5, 20.5}}, label: 'Next'
+                                Image, 0x1036610c0, {{522.0, 259.0}, {8.5, 14.5}}, identifier: 'chevron.forward', label: 'Forward'
+                              StaticText, 0x103661e40, {{50.0, 314.4}, {11.0, 20.5}}, label: '#'
+                              StaticText, 0x1036621c0, {{89.0, 314.4}, {95.0, 20.5}}, label: 'Candidate'
+                              StaticText, 0x103662520, {{457.5, 314.4}, {74.0, 20.5}}, label: '% votes'
+                              StaticText, 0x103662870, {{50.0, 351.5}, {7.5, 20.5}}, label: '1'
+                              StaticText, 0x103662bd0, {{85.5, 351.5}, {116.0, 20.5}}, label: 'Giovanni Green'
+                              StaticText, 0x103662f40, {{478.5, 351.5}, {53.0, 20.5}}, label: '46.0%'
+                              StaticText, 0x1036632c0, {{50.0, 374.0}, {10.0, 20.5}}, label: '2'
+                              StaticText, 0x103663620, {{88.0, 374.0}, {106.0, 20.5}}, label: 'Patrick Purple'
+                              StaticText, 0x103663990, {{478.5, 374.0}, {53.0, 20.5}}, label: '27.7%'
+                              StaticText, 0x103663ce0, {{50.0, 396.5}, {10.5, 20.5}}, label: '3'
+                              StaticText, 0x103664050, {{88.5, 396.5}, {95.5, 20.5}}, label: 'Raphael Red'
+                              StaticText, 0x1036643b0, {{478.5, 396.5}, {53.0, 20.5}}, label: '26.3%'
+                              StaticText, 0x103664720, {{209.8, 442.8}, {162.0, 16.0}}, label: 'Raphael Red is eliminated.'
+                              Image, 0x103664a80, {{31.0, 485.5}, {13.0, 13.0}}, identifier: 'info.circle', label: 'Info'
+                              StaticText, 0x103664e20, {{53.0, 484.0}, {436.0, 16.0}}, label: 'Tap on the leaderboard to switch between relative and absolute metrics.'
+                              StaticText, 0x103665190, {{30.0, 538.8}, {500.5, 86.5}}, label: 'We just saw that with Plurality Voting, it’s sometimes in your best interest to lie… So, what if you had fallbacks to your ballot? If your favorite candidate doesn’t stand a chance, then your ballot picks your 2nd favorite!'
+                              StaticText, 0x103665510, {{30.0, 645.3}, {506.5, 86.5}}, label: 'That’s the entire premise of Instant Runoff Voting (IRV). A simpler way to visualize it would be by using multiple election rounds, eliminating the weakest candidate each time & stopping whenever someone gains over 50% of the votes.'
+                              StaticText, 0x103665880, {{30.0, 751.8}, {210.0, 20.5}}, label: 'Of course, there's a catch.'
+                              Button, 0x103665bf0, {{301.5, 812.5}, {250.0, 60.5}}, label: 'How so?'
+                                StaticText, 0x103665f70, {{381.8, 832.4}, {67.5, 20.5}}, label: 'How so?'
+                                Image, 0x1036662e0, {{461.0, 835.0}, {9.5, 15.5}}, identifier: 'chevron.forward', label: 'Forward'
+                            Other, 0x103666650, {{556.5, 74.0}, {30.0, 746.0}}, label: 'Vertical scroll bar, 2 pages', value: 0%
+                              Other, 0x1036669b0, {{583.5, 77.0}, {3.0, 634.5}}
+                            Other, 0x103666d20, {{556.5, 74.0}, {30.0, 746.0}}, label: 'Vertical scroll bar, 2 pages', value: 0%
+                              Other, 0x103667090, {{583.5, 77.0}, {3.0, 634.5}}
 Path to element:
- →Application, 0x105c10a00, pid: 11760, label: 'BallotPlay'
+ →Application, 0x103471d10, pid: 11549, label: 'BallotPlay'
 Query chain:
  →Find: Target Application 'dbr.BallotPlay'
   Output: {
-    Application, 0x105e42e70, pid: 11760, label: 'BallotPlay'
+    Application, 0x10348bba0, pid: 11549, label: 'BallotPlay'
   }
 )
