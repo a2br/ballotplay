@@ -117,7 +117,7 @@ jobs:
           done
           if [ -f tour-output/tour.mov ]; then
             # simctl records the portrait framebuffer: rotate the landscape tour upright and trim it to the test run.
-            RANGE=$(python3 -c 'import sys; s=float(open(sys.argv[1]).read()); t=dict((l.rstrip("\n").split("\t")[1], float(l.split("\t")[0])) for l in open(sys.argv[2])); print("%.2f %.2f" % (max(0, t["launch"]-s-3), t["end"]-s+0.8))' \
+            RANGE=$(python3 -c 'import sys; s=float(open(sys.argv[1]).read()); t=dict((l.rstrip("\n").split("\t")[1], float(l.split("\t")[0])) for l in open(sys.argv[2])); print("%.2f %.2f" % (max(0, t["launch"]-s+0.4), t["end"]-s+0.8))' \
               tour-output/debug/record_start.txt tour-output/debug/timeline.tsv)
             set -- $RANGE
             ffmpeg -hide_banner -y -loglevel error -i tour-output/tour.mov -ss "$1" -to "$2" \
