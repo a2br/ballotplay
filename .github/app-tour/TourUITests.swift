@@ -3,10 +3,21 @@ import XCTest
 
 /// Walks through every chapter of BallotPlay on an iPad in landscape, saving a
 /// screenshot at each step. The workflow records the simulator screen meanwhile.
+///
+/// Environment (set by run_tour.sh):
+/// - TOUR_DIR: where screenshots go; timeline and UI dumps go next to it in debug/.
+/// - TOUR_SHOTS=0: keep the pacing but save no screenshots (video-only pass).
+/// - TOUR_PAIRED=1: also save each screenshot in dark mode, switching the
+///   simulator through TOUR_APPEARANCE_DIR and back to light.
 @MainActor
 final class TourUITests: XCTestCase {
     private var app: XCUIApplication!
     private var shotIndex = 0
+
+    private let env = ProcessInfo.processInfo.environment
+    private var savesShots: Bool { env["TOUR_SHOTS"] != "0" }
+    private var paired: Bool { env["TOUR_PAIRED"] == "1" }
+    private lazy var appearanceDir: URL? = env["TOUR_APPEARANCE_DIR"].flatMap { $0.isEmpty ? nil : URL(fileURLWithPath: $0, isDirectory: true) }
 
     private lazy var outputDir: URL? = {
         guard let dir = ProcessInfo.processInfo.environment["TOUR_DIR"], !dir.isEmpty else { return nil }
@@ -151,8 +162,10 @@ final class TourUITests: XCTestCase {
         // Chapter menu
         chapter("menu")
         openChapterMenu()
-        snap("chapter-menu")
+        snap("chapter-menu", restore: { self.openChapterMenu() })
         let first = app.buttons["The Usual: Plurality"]
+        // The appearance switch for the dark twin can close the menu.
+        if !first.waitForExistence(timeout: 2) { openChapterMenu() }
         if first.waitForExistence(timeout: 3) {
             first.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
         }
@@ -168,11 +181,44 @@ final class TourUITests: XCTestCase {
         Thread.sleep(forTimeInterval: seconds)
     }
 
-    private func snap(_ name: String, settle: TimeInterval = 1.0) {
+    /// `restore` puts back transient UI (an open menu) that the appearance switch may close.
+    private func snap(_ name: String, settle: TimeInterval = 1.0, restore: (() -> Void)? = nil) {
         pause(settle)
         shotIndex += 1
         let fileName = String(format: "%02d-%@", shotIndex, name)
         mark("shot \(fileName)")
+        guard savesShots else { return }
+        save(fileName)
+        if paired, setAppearance("dark") {
+            pause(1.2)
+            restore?()
+            save(fileName + "-dark")
+            if setAppearance("light") { pause(1.0) }
+            mark("light again")
+        }
+    }
+
+    /// Asks run_tour.sh to switch the simulator's appearance and waits until it has.
+    private func setAppearance(_ mode: String) -> Bool {
+        guard let dir = appearanceDir else { return false }
+        mark("appearance \(mode)")
+        let ack = dir.appendingPathComponent("ack")
+        try? FileManager.default.removeItem(at: ack)
+        try? mode.write(to: dir.appendingPathComponent("request"), atomically: true, encoding: .utf8)
+        let deadline = Date().addingTimeInterval(20)
+        while Date() < deadline {
+            if let done = try? String(contentsOf: ack, encoding: .utf8),
+               done.trimmingCharacters(in: .whitespacesAndNewlines) == mode {
+                try? FileManager.default.removeItem(at: ack)
+                return true
+            }
+            pause(0.1)
+        }
+        XCTFail("appearance \(mode) was not applied")
+        return false
+    }
+
+    private func save(_ fileName: String) {
         let image = XCUIScreen.main.screenshot().image
         // Redraw so the PNG pixels carry the landscape orientation.
         let format = UIGraphicsImageRendererFormat()

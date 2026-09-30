@@ -1,7 +1,8 @@
 name: App tour
 
-# Builds BallotPlay for an iPad simulator, walks through every chapter with a
-# UI test, and uploads the screenshots plus a screen recording as an artifact.
+# Builds BallotPlay for an iPad simulator and walks through every chapter with a
+# UI test: once in light mode (every screenshot also taken in dark), then once in
+# dark mode for a dark recording. Uploads screenshots and recordings as an artifact.
 on:
   workflow_dispatch:
   push:
@@ -46,7 +47,6 @@ jobs:
           echo "UDID=$UDID" >> "$GITHUB_ENV"
           xcrun simctl boot "$UDID"
           xcrun simctl bootstatus "$UDID" -b
-          xcrun simctl ui "$UDID" appearance light || true
           xcrun simctl status_bar "$UDID" override --time "9:41" --dataNetwork wifi --wifiMode active --wifiBars 3 --batteryState charged --batteryLevel 100 || true
 
       - name: Build
@@ -56,45 +56,28 @@ jobs:
             -project BallotPlayTour.xcodeproj -scheme BallotPlayTour \
             -destination "id=$UDID" -derivedDataPath build -quiet
 
-      - name: Run tour and record the screen
-        run: |
-          OUT="$PWD/tour-output"
-          mkdir -p "$OUT/screenshots" "$OUT/debug"
-          xcrun simctl io "$UDID" recordVideo --codec=h264 --force "$OUT/tour.mov" 2> "$OUT/debug/record.log" &
-          REC=$!
-          # The recorder can take several seconds to start; stamp the moment it does so the video lines up with the timeline.
-          for i in $(seq 1 150); do
-            grep -q "Recording started" "$OUT/debug/record.log" && break
-            sleep 0.2
-          done
-          python3 -c 'import time; print(time.time())' > "$OUT/debug/record_start.txt"
-          sleep 2
-          set +e
-          TEST_RUNNER_TOUR_DIR="$OUT/screenshots" xcodebuild test-without-building \
-            -project .github/app-tour/BallotPlayTour.xcodeproj -scheme BallotPlayTour \
-            -destination "id=$UDID" -derivedDataPath .github/app-tour/build \
-            -resultBundlePath "$OUT/Tour.xcresult"
-          STATUS=$?
-          sleep 2
-          kill -INT "$REC"
-          wait "$REC"
-          ls -la "$OUT" "$OUT/screenshots"
-          exit $STATUS
+      - name: Tour in light mode, with a dark twin of every screenshot
+        run: bash .github/app-tour/run_tour.sh "$PWD/tour-output/light" light 1
 
-      - name: Export screenshots kept in the result bundle
+      - name: Tour in dark mode, for the dark recording
+        if: always()
+        run: bash .github/app-tour/run_tour.sh "$PWD/tour-output/dark" dark 0
+
+      - name: Collect result bundles
         if: always()
         run: |
-          xcrun xcresulttool export attachments --path tour-output/Tour.xcresult --output-path tour-output/attachments || true
-          mkdir -p results && mv tour-output/Tour.xcresult results/ || true
+          mkdir -p results
+          for pass in light dark; do
+            [ -d "tour-output/$pass/Tour.xcresult" ] || continue
+            xcrun xcresulttool export attachments --path "tour-output/$pass/Tour.xcresult" --output-path "tour-output/$pass/attachments" || true
+            mv "tour-output/$pass/Tour.xcresult" "results/$pass.xcresult"
+          done
 
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: ballotplay-tour
-          path: |
-            tour-output/screenshots
-            tour-output/debug
-            tour-output/tour.mov
+          path: tour-output
           retention-days: 14
 
       - uses: actions/upload-artifact@v4
@@ -111,20 +94,19 @@ jobs:
         run: |
           brew install ffmpeg > /dev/null
           DEST=.github/app-tour/media
-          rm -rf "$DEST" && mkdir -p "$DEST/screenshots" "$DEST/debug"
-          for f in tour-output/screenshots/*.png; do
+          rm -rf "$DEST" && mkdir -p "$DEST/screenshots" "$DEST/debug/light" "$DEST/debug/dark"
+          for f in tour-output/light/screenshots/*.png; do
             sips -s format jpeg -s formatOptions 85 --resampleWidth 1800 "$f" --out "$DEST/screenshots/$(basename "${f%.png}").jpg" > /dev/null
           done
-          if [ -f tour-output/tour.mov ]; then
-            # simctl records the portrait framebuffer: rotate the landscape tour upright and trim it to the test run.
-            RANGE=$(python3 -c 'import sys; s=float(open(sys.argv[1]).read()); t=dict((l.rstrip("\n").split("\t")[1], float(l.split("\t")[0])) for l in open(sys.argv[2])); print("%.2f %.2f" % (max(0, t["launch"]-s+0.4), t["end"]-s+0.8))' \
-              tour-output/debug/record_start.txt tour-output/debug/timeline.tsv)
-            set -- $RANGE
-            ffmpeg -hide_banner -y -loglevel error -i tour-output/tour.mov -ss "$1" -to "$2" \
-              -vf "transpose=2,scale=trunc(iw/4)*2:-2,fps=30,format=yuv420p" \
-              -c:v libx264 -preset slow -crf 22 -tune stillimage -movflags +faststart -an "$DEST/tour.mp4"
+          # simctl records the portrait framebuffer; make_video.py rotates, trims and (for light) cuts out the dark twins.
+          if [ -f tour-output/light/tour.mov ]; then
+            python3 .github/app-tour/make_video.py tour-output/light "$DEST/tour.mp4" --cut-dark
           fi
-          cp -R tour-output/debug/. "$DEST/debug/" || true
+          if [ -f tour-output/dark/tour.mov ]; then
+            python3 .github/app-tour/make_video.py tour-output/dark "$DEST/tour-dark.mp4"
+          fi
+          cp -R tour-output/light/debug/. "$DEST/debug/light/" || true
+          cp -R tour-output/dark/debug/. "$DEST/debug/dark/" || true
           du -sh "$DEST" "$DEST"/*
           git config user.name "github-actions[bot]"
           git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
