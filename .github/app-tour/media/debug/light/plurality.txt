@@ -1,0 +1,77 @@
+Optional(Attributes: Application, 0x1015bd040, pid: 9975, label: 'BallotPlay'
+Element subtree:
+ →Application, 0x1015bd040, pid: 9975, label: 'BallotPlay'
+    Window (Main), 0x10154ea00, {{0.0, 0.0}, {1180.0, 820.0}}
+      Other, 0x10154ed50, {{0.0, 0.0}, {1180.0, 820.0}}
+        Other, 0x10154f0e0, {{0.0, 0.0}, {1180.0, 820.0}}
+          Other, 0x10154b6d0, {{0.0, 0.0}, {1180.0, 820.0}}
+            Other, 0x10154fed0, {{0.0, 0.0}, {1180.0, 820.0}}
+              Other, 0x10154f460, {{0.0, 0.0}, {1180.0, 820.0}}
+                StaticText, 0x101550220, {{615.0, 149.4}, {480.5, 84.0}}, label: 'George Green is winning with Plurality Voting.'
+                Other, 0x101550580, {{615.0, 255.0}, {540.0, 540.0}}, identifier: 'compass'
+                Other, 0x101550900, {{743.5, 397.5}, {40.0, 40.0}}, identifier: 'candidate-Chloe Cyan', label: 'Chloe Cyan'
+                Other, 0x10154f7b0, {{799.0, 425.0}, {40.0, 40.0}}, identifier: 'candidate-Beatrice Blue', label: 'Beatrice Blue'
+                Other, 0x10154fb50, {{925.5, 424.0}, {40.0, 40.0}}, identifier: 'candidate-George Green', label: 'George Green'
+                Other, 0x101550c60, {{745.0, 604.0}, {300.0, 112.5}}, identifier: 'TipView'
+                  Image, 0x101550fb0, {{763.0, 622.0}, {35.0, 45.0}}, identifier: 'hand.point.up.fill', label: 'hand.point.up.fill'
+                  StaticText, 0x101551310, {{814.0, 617.8}, {141.0, 20.5}}, label: 'Political Compass'
+                  StaticText, 0x101551690, {{814.0, 642.2}, {218.0, 58.0}}, label: 'Move candidates around on the political compass, and voters will change colors.'
+                  Button, 0x101551a10, {{1001.0, 607.0}, {44.0, 44.0}}, identifier: 'xmark', label: 'Close'
+                Other, 0x101551d80, {{0.0, 0.0}, {589.5, 820.0}}
+                  NavigationBar, 0x1015520f0, {{0.0, 24.0}, {589.5, 102.0}}, identifier: 'The Usual: Plurality'
+                    Other, 0x101552450, {{463.0, 35.5}, {42.5, 27.5}}, label: 'List'
+                      Other, 0x1015527b0, {{463.0, 35.5}, {42.5, 27.5}}
+                        Button, 0x101552b10, {{463.0, 35.5}, {42.5, 27.5}}, label: 'List'
+                          Button, 0x101552e90, {{463.0, 35.5}, {42.5, 27.5}}
+                            Other, 0x101553210, {{463.0, 35.5}, {42.5, 27.5}}
+                              Image, 0x1015535a0, {{463.0, 35.5}, {42.5, 27.5}}, identifier: 'list.bullet', label: 'List'
+                    Other, 0x1015538f0, {{513.5, 34.0}, {56.0, 30.5}}, identifier: 'chevron.backward', label: 'Back'
+                      Other, 0x101553c80, {{513.5, 34.0}, {56.0, 30.5}}
+                        Button, 0x101553ff0, {{513.5, 34.0}, {24.0, 30.5}}, identifier: 'chevron.backward', label: 'Back', Disabled
+                        Button, 0x101554360, {{545.5, 34.0}, {24.0, 30.5}}, identifier: 'chevron.forward', label: 'Forward'
+                    StaticText, 0x1015546a0, {{20.0, 77.5}, {302.5, 41.0}}, label: 'The Usual: Plurality'
+                  Other, 0x101554a10, {{0.0, 0.0}, {589.5, 820.0}}
+                    Other, 0x101554d80, {{0.0, 0.0}, {589.5, 820.0}}
+                      Other, 0x1015550f0, {{0.0, 0.0}, {589.5, 820.0}}
+                        Other, 0x101555450, {{0.0, 0.0}, {589.5, 820.0}}
+                          ScrollView, 0x1015557a0, {{0.0, 0.0}, {589.5, 820.0}}
+                            Other, 0x101555b00, {{0.0, 126.0}, {589.5, 618.0}}
+                              Stepper, 0x101555e60, {{50.0, 176.0}, {481.5, 32.0}}, label: 'Number of candidates: 3', value: 3
+                                Other, 0x1015561f0, {{437.5, 176.0}, {94.0, 32.0}}
+                                  Image, 0x101556540, {{437.5, 176.0}, {46.5, 32.0}}
+                                  Button, 0x1015568c0, {{437.5, 176.0}, {46.5, 32.0}}, identifier: 'Decrement', label: 'Number of candidates: 3, Decrement', value: 3
+                                  Image, 0x101556c40, {{484.0, 176.0}, {1.0, 32.0}}
+                                    Image, 0x101556fa0, {{484.0, 176.0}, {1.0, 32.0}}
+                                  Image, 0x1015572f0, {{485.0, 176.0}, {46.5, 32.0}}
+                                  Button, 0x101557670, {{485.0, 176.0}, {46.5, 32.0}}, identifier: 'Increment', label: 'Number of candidates: 3, Increment', value: 3
+                              StaticText, 0x1015579c0, {{50.0, 256.0}, {11.0, 20.5}}, label: '#'
+                              StaticText, 0x101557d10, {{89.0, 256.0}, {95.0, 20.5}}, label: 'Candidate'
+                              StaticText, 0x101558080, {{457.5, 256.0}, {74.0, 20.5}}, label: '% votes'
+                              StaticText, 0x1015583d0, {{50.0, 293.1}, {7.5, 20.5}}, label: '1'
+                              StaticText, 0x101558760, {{85.5, 293.1}, {107.0, 20.5}}, label: 'George Green'
+                              StaticText, 0x101558ad0, {{478.5, 293.1}, {53.0, 20.5}}, label: '52.9%'
+                              StaticText, 0x101558e70, {{50.0, 315.6}, {10.0, 20.5}}, label: '2'
+                              StaticText, 0x1015591c0, {{88.0, 315.6}, {101.0, 20.5}}, label: 'Beatrice Blue'
+                              StaticText, 0x101559510, {{478.5, 315.6}, {53.0, 20.5}}, label: '23.5%'
+                              StaticText, 0x101559880, {{50.0, 338.1}, {10.5, 20.5}}, label: '3'
+                              StaticText, 0x101559c10, {{88.5, 338.1}, {87.5, 20.5}}, label: 'Chloe Cyan'
+                              StaticText, 0x101559fb0, {{478.5, 338.1}, {53.0, 20.5}}, label: '23.5%'
+                              Image, 0x10155a310, {{31.0, 385.0}, {13.0, 13.0}}, identifier: 'info.circle', label: 'Info'
+                              StaticText, 0x10155a690, {{53.0, 383.7}, {436.0, 16.0}}, label: 'Tap on the leaderboard to switch between relative and absolute metrics.'
+                              StaticText, 0x10155aa10, {{30.0, 438.6}, {506.5, 64.5}}, label: 'Plurality voting is the most widely used voting system. It is hard to think of something more intuitive: “Just pick the candidate you like best.”'
+                              StaticText, 0x10155b0e0, {{30.0, 523.1}, {507.5, 42.5}}, label: 'Feel free to play around with this election. When you’re ready, let’s take a look at why it may not be enough…'
+                              Button, 0x10155b440, {{301.5, 605.5}, {250.0, 60.5}}, label: 'Next'
+                                StaticText, 0x10155b7b0, {{396.8, 625.6}, {37.5, 20.5}}, label: 'Next'
+                                Image, 0x10155bb50, {{446.0, 628.0}, {9.5, 15.5}}, identifier: 'chevron.forward', label: 'Forward'
+                            Other, 0x10155beb0, {{556.5, 74.0}, {30.0, 746.0}}, label: 'Vertical scroll bar, 1 page', value: 0%
+                              Other, 0x10155c990, {{583.5, 128.0}, {3.0, 689.0}}
+                            Other, 0x10155cd10, {{556.5, 74.0}, {30.0, 746.0}}, label: 'Vertical scroll bar, 1 page', value: 0%
+                              Other, 0x10155d060, {{583.5, 128.0}, {3.0, 689.0}}
+Path to element:
+ →Application, 0x1015bd040, pid: 9975, label: 'BallotPlay'
+Query chain:
+ →Find: Target Application 'dbr.BallotPlay'
+  Output: {
+    Application, 0x101630560, pid: 9975, label: 'BallotPlay'
+  }
+)

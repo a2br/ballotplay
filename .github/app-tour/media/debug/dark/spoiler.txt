@@ -1,0 +1,64 @@
+Optional(Attributes: Application, 0x103446a40, pid: 32696, label: 'BallotPlay'
+Element subtree:
+ →Application, 0x103446a40, pid: 32696, label: 'BallotPlay'
+    Window (Main), 0x103446b60, {{0.0, 0.0}, {1180.0, 820.0}}
+      Other, 0x10347b710, {{0.0, 0.0}, {1180.0, 820.0}}
+        Other, 0x10347b830, {{0.0, 0.0}, {1180.0, 820.0}}
+          Other, 0x1034464c0, {{0.0, 0.0}, {1180.0, 820.0}}
+            Other, 0x1034465e0, {{0.0, 0.0}, {1180.0, 820.0}}
+              Other, 0x103446700, {{0.0, 0.0}, {1180.0, 820.0}}
+                StaticText, 0x10347b950, {{615.0, 149.4}, {414.5, 84.0}}, label: 'Bella Blue is winning with Plurality Voting.'
+                Other, 0x10347ba70, {{615.0, 255.0}, {540.0, 540.0}}, identifier: 'compass'
+                Other, 0x10347bb90, {{740.0, 630.0}, {40.0, 40.0}}, identifier: 'candidate-Ronald Red', label: 'Ronald Red'
+                  Image, 0x10347bcb0, {{754.0, 641.5}, {12.5, 17.0}}, identifier: 'lock', label: 'Lock'
+                Other, 0x10347bdd0, {{915.0, 442.5}, {40.0, 40.0}}, identifier: 'candidate-Bella Blue', label: 'Bella Blue'
+                  Image, 0x10347bef0, {{929.0, 454.0}, {12.5, 17.0}}, identifier: 'lock', label: 'Lock'
+                Other, 0x10347c010, {{1115.0, 755.0}, {40.0, 40.0}}, identifier: 'candidate-Giovanni Green', label: 'Giovanni Green'
+                Other, 0x10347c130, {{0.0, 0.0}, {589.5, 820.0}}
+                  NavigationBar, 0x1034471b0, {{0.0, 24.0}, {589.5, 102.0}}, identifier: 'Spoiler Effect'
+                    Other, 0x1034472d0, {{463.0, 35.5}, {42.5, 27.5}}, label: 'List'
+                      Other, 0x1034473f0, {{463.0, 35.5}, {42.5, 27.5}}
+                        Button, 0x103447510, {{463.0, 35.5}, {42.5, 27.5}}, label: 'List'
+                          Button, 0x103447630, {{463.0, 35.5}, {42.5, 27.5}}
+                            Other, 0x103447750, {{463.0, 35.5}, {42.5, 27.5}}
+                              Image, 0x103447870, {{463.0, 35.5}, {42.5, 27.5}}, identifier: 'list.bullet', label: 'List'
+                    Other, 0x103447990, {{513.5, 34.0}, {56.0, 30.5}}, identifier: 'chevron.backward', label: 'Back'
+                      Other, 0x103447ab0, {{513.5, 34.0}, {56.0, 30.5}}
+                        Button, 0x103447bd0, {{513.5, 34.0}, {24.0, 30.5}}, identifier: 'chevron.backward', label: 'Back'
+                        Button, 0x103447cf0, {{545.5, 34.0}, {24.0, 30.5}}, identifier: 'chevron.forward', label: 'Forward'
+                    StaticText, 0x103447e10, {{20.0, 77.5}, {213.0, 41.0}}, label: 'Spoiler Effect'
+                  Other, 0x103447f30, {{0.0, 0.0}, {589.5, 820.0}}
+                    Other, 0x103448050, {{0.0, 0.0}, {589.5, 820.0}}
+                      Other, 0x103448170, {{0.0, 0.0}, {589.5, 820.0}}
+                        Other, 0x103448290, {{0.0, 0.0}, {589.5, 820.0}}
+                          ScrollView, 0x1034483b0, {{0.0, 0.0}, {589.5, 820.0}}
+                            Other, 0x1034484d0, {{0.0, 126.0}, {589.5, 483.0}}
+                              StaticText, 0x1034485f0, {{50.0, 176.0}, {11.0, 20.5}}, label: '#'
+                              StaticText, 0x103448710, {{89.0, 176.0}, {95.0, 20.5}}, label: 'Candidate'
+                              StaticText, 0x103448830, {{457.5, 176.0}, {74.0, 20.5}}, label: '% votes'
+                              StaticText, 0x103448950, {{50.0, 213.1}, {7.5, 20.5}}, label: '1'
+                              StaticText, 0x103448a70, {{85.5, 213.1}, {74.5, 20.5}}, label: 'Bella Blue'
+                              StaticText, 0x103448b90, {{478.5, 213.1}, {53.0, 20.5}}, label: '52.9%'
+                              StaticText, 0x103448cb0, {{50.0, 235.6}, {10.0, 20.5}}, label: '2'
+                              StaticText, 0x103448dd0, {{88.0, 235.6}, {86.5, 20.5}}, label: 'Ronald Red'
+                              StaticText, 0x103448ef0, {{478.5, 235.6}, {53.0, 20.5}}, label: '33.6%'
+                              StaticText, 0x103449010, {{50.0, 258.1}, {10.5, 20.5}}, label: '3'
+                              StaticText, 0x103449130, {{88.5, 258.1}, {116.0, 20.5}}, label: 'Giovanni Green'
+                              StaticText, 0x103449250, {{478.5, 258.1}, {53.0, 20.5}}, label: '13.5%'
+                              Image, 0x103449370, {{31.0, 305.0}, {13.0, 13.0}}, identifier: 'info.circle', label: 'Info'
+                              StaticText, 0x103449490, {{53.0, 303.7}, {436.0, 16.0}}, label: 'Tap on the leaderboard to switch between relative and absolute metrics.'
+                              StaticText, 0x1034495b0, {{30.0, 358.6}, {507.0, 42.5}}, label: 'Here, we have 3 candidates. Slowly drag Giovanni Green closer to Bella Blue, and watch what happens...'
+                              Image, 0x1034496d0, {{55.0, 466.0}, {40.0, 40.0}}, identifier: 'signpost.right.and.left.circle.fill', label: 'signpost.right.and.left.circle.fill'
+                              StaticText, 0x1034497f0, {{153.0, 475.8}, {328.0, 20.5}}, label: 'Move Giovanni Green closer to Bella Blue.'
+                            Other, 0x103449910, {{556.5, 74.0}, {30.0, 746.0}}, label: 'Vertical scroll bar, 1 page', value: 0%
+                              Other, 0x103449a30, {{583.5, 263.0}, {3.0, 554.0}}
+                            Other, 0x103449b50, {{556.5, 74.0}, {30.0, 746.0}}, label: 'Vertical scroll bar, 1 page', value: 0%
+                              Other, 0x103449c70, {{583.5, 263.0}, {3.0, 554.0}}
+Path to element:
+ →Application, 0x103446a40, pid: 32696, label: 'BallotPlay'
+Query chain:
+ →Find: Target Application 'dbr.BallotPlay'
+  Output: {
+    Application, 0x1035507d0, pid: 32696, label: 'BallotPlay'
+  }
+)

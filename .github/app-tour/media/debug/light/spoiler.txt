@@ -1,0 +1,64 @@
+Optional(Attributes: Application, 0x10167ed10, pid: 9975, label: 'BallotPlay'
+Element subtree:
+ →Application, 0x10167ed10, pid: 9975, label: 'BallotPlay'
+    Window (Main), 0x10167f170, {{0.0, 0.0}, {1180.0, 820.0}}
+      Other, 0x10167f530, {{0.0, 0.0}, {1180.0, 820.0}}
+        Other, 0x10167f650, {{0.0, 0.0}, {1180.0, 820.0}}
+          Other, 0x10167f290, {{0.0, 0.0}, {1180.0, 820.0}}
+            Other, 0x10167f3b0, {{0.0, 0.0}, {1180.0, 820.0}}
+              Other, 0x10167fbf0, {{0.0, 0.0}, {1180.0, 820.0}}
+                StaticText, 0x10167f770, {{615.0, 149.4}, {451.5, 84.0}}, label: 'Cindia Cyan is winning with Plurality Voting.'
+                Other, 0x10167f890, {{615.0, 255.0}, {540.0, 540.0}}, identifier: 'compass'
+                Other, 0x10167f9b0, {{740.0, 630.0}, {40.0, 40.0}}, identifier: 'candidate-George Green', label: 'George Green'
+                  Image, 0x10167fad0, {{754.0, 641.5}, {12.5, 17.0}}, identifier: 'lock', label: 'Lock'
+                Other, 0x10167fd10, {{915.0, 442.5}, {40.0, 40.0}}, identifier: 'candidate-Cindia Cyan', label: 'Cindia Cyan'
+                  Image, 0x10167fe30, {{929.0, 454.0}, {12.5, 17.0}}, identifier: 'lock', label: 'Lock'
+                Other, 0x10167ff50, {{1115.0, 755.0}, {40.0, 40.0}}, identifier: 'candidate-Raphael Red', label: 'Raphael Red'
+                Other, 0x101680070, {{0.0, 0.0}, {589.5, 820.0}}
+                  NavigationBar, 0x101680190, {{0.0, 24.0}, {589.5, 102.0}}, identifier: 'Spoiler Effect'
+                    Other, 0x1016802b0, {{463.0, 35.5}, {42.5, 27.5}}, label: 'List'
+                      Other, 0x1016803d0, {{463.0, 35.5}, {42.5, 27.5}}
+                        Button, 0x1016804f0, {{463.0, 35.5}, {42.5, 27.5}}, label: 'List'
+                          Button, 0x101680610, {{463.0, 35.5}, {42.5, 27.5}}
+                            Other, 0x101680730, {{463.0, 35.5}, {42.5, 27.5}}
+                              Image, 0x101680850, {{463.0, 35.5}, {42.5, 27.5}}, identifier: 'list.bullet', label: 'List'
+                    Other, 0x101680970, {{513.5, 34.0}, {56.0, 30.5}}, identifier: 'chevron.backward', label: 'Back'
+                      Other, 0x101680a90, {{513.5, 34.0}, {56.0, 30.5}}
+                        Button, 0x101680bb0, {{513.5, 34.0}, {24.0, 30.5}}, identifier: 'chevron.backward', label: 'Back'
+                        Button, 0x101680cd0, {{545.5, 34.0}, {24.0, 30.5}}, identifier: 'chevron.forward', label: 'Forward'
+                    StaticText, 0x101680df0, {{20.0, 77.5}, {213.0, 41.0}}, label: 'Spoiler Effect'
+                  Other, 0x101680f10, {{0.0, 0.0}, {589.5, 820.0}}
+                    Other, 0x101681030, {{0.0, 0.0}, {589.5, 820.0}}
+                      Other, 0x101681150, {{0.0, 0.0}, {589.5, 820.0}}
+                        Other, 0x101681270, {{0.0, 0.0}, {589.5, 820.0}}
+                          ScrollView, 0x101681390, {{0.0, 0.0}, {589.5, 820.0}}
+                            Other, 0x1016814b0, {{0.0, 126.0}, {589.5, 483.0}}
+                              StaticText, 0x1016815d0, {{50.0, 176.0}, {11.0, 20.5}}, label: '#'
+                              StaticText, 0x1016816f0, {{89.0, 176.0}, {95.0, 20.5}}, label: 'Candidate'
+                              StaticText, 0x101681810, {{457.5, 176.0}, {74.0, 20.5}}, label: '% votes'
+                              StaticText, 0x101681930, {{50.0, 213.1}, {7.5, 20.5}}, label: '1'
+                              StaticText, 0x101681a50, {{85.5, 213.1}, {91.0, 20.5}}, label: 'Cindia Cyan'
+                              StaticText, 0x101681b70, {{478.5, 213.1}, {53.0, 20.5}}, label: '52.9%'
+                              StaticText, 0x101681c90, {{50.0, 235.6}, {10.0, 20.5}}, label: '2'
+                              StaticText, 0x101681db0, {{88.0, 235.6}, {107.0, 20.5}}, label: 'George Green'
+                              StaticText, 0x101681ed0, {{478.5, 235.6}, {53.0, 20.5}}, label: '33.9%'
+                              StaticText, 0x101681ff0, {{50.0, 258.1}, {10.5, 20.5}}, label: '3'
+                              StaticText, 0x101682110, {{88.5, 258.1}, {95.5, 20.5}}, label: 'Raphael Red'
+                              StaticText, 0x101682230, {{478.5, 258.1}, {53.0, 20.5}}, label: '13.1%'
+                              Image, 0x101682350, {{31.0, 305.0}, {13.0, 13.0}}, identifier: 'info.circle', label: 'Info'
+                              StaticText, 0x101682470, {{53.0, 303.7}, {436.0, 16.0}}, label: 'Tap on the leaderboard to switch between relative and absolute metrics.'
+                              StaticText, 0x101682590, {{30.0, 358.6}, {485.5, 42.5}}, label: 'Here, we have 3 candidates. Slowly drag Raphael Red closer to Cindia Cyan, and watch what happens...'
+                              Image, 0x1016826b0, {{55.0, 466.0}, {40.0, 40.0}}, identifier: 'signpost.right.and.left.circle.fill', label: 'signpost.right.and.left.circle.fill'
+                              StaticText, 0x1016827d0, {{153.0, 475.8}, {323.0, 20.5}}, label: 'Move Raphael Red closer to Cindia Cyan.'
+                            Other, 0x101577bf0, {{556.5, 74.0}, {30.0, 746.0}}, label: 'Vertical scroll bar, 1 page', value: 0%
+                              Other, 0x1015759b0, {{583.5, 263.0}, {3.0, 554.0}}
+                            Other, 0x101577f40, {{556.5, 74.0}, {30.0, 746.0}}, label: 'Vertical scroll bar, 1 page', value: 0%
+                              Other, 0x101576770, {{583.5, 263.0}, {3.0, 554.0}}
+Path to element:
+ →Application, 0x10167ed10, pid: 9975, label: 'BallotPlay'
+Query chain:
+ →Find: Target Application 'dbr.BallotPlay'
+  Output: {
+    Application, 0x1014a7070, pid: 9975, label: 'BallotPlay'
+  }
+)
