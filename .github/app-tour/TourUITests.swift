@@ -383,7 +383,9 @@ final class TourUITests: XCTestCase {
         let title = app.staticTexts["So, what's next?"].firstMatch
         if title.exists {
             let start = title.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
-            start.press(forDuration: 0.1, thenDragTo: start.withOffset(CGVector(dx: 0, dy: 700)), withVelocity: .fast, thenHoldForDuration: 0)
+            // Stay on screen even on an 11-inch iPad (820 pt tall in landscape).
+            let room = max(200, app.windows.firstMatch.frame.maxY - title.frame.midY - 20)
+            start.press(forDuration: 0.1, thenDragTo: start.withOffset(CGVector(dx: 0, dy: min(500, room))), withVelocity: .fast, thenHoldForDuration: 0)
         }
         if !body.waitForNonExistence(timeout: 4) {
             app.windows.firstMatch.coordinate(withNormalizedOffset: CGVector(dx: 0.03, dy: 0.5)).tap()

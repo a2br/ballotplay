@@ -17,5 +17,8 @@ screen recording of BallotPlay on a macOS runner.
 This folder starts with a dot, so Swift Playgrounds and SwiftPM ignore it. The
 app package builds exactly as before.
 
+The simulator is set by `TOUR_DEVICE` in the workflow (currently
+"iPad Air 11-inch (M3)").
+
 To run it again, push a change under `.github/app-tour/`, or re-run the latest
 `App tour` run from the Actions tab.

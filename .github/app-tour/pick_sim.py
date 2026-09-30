@@ -1,11 +1,16 @@
 """Prints the UDID of the best available iPad simulator.
 
-Prefers a 13-inch iPad Pro on an iOS 17/18 runtime, the era the app was built for.
+Prefers the device named in TOUR_DEVICE (e.g. "iPad Air 11-inch (M3)"), then a
+13-inch iPad Pro, on an iOS 17/18 runtime, the era the app was built for.
 """
 import json
+import os
 import re
 import subprocess
 import sys
+
+preferred = os.environ.get("TOUR_DEVICE", "").strip()
+family = preferred.split(" (")[0]
 
 data = json.loads(subprocess.check_output(["xcrun", "simctl", "list", "devices", "available", "-j"]))
 
@@ -19,7 +24,11 @@ for runtime, devices in data["devices"].items():
         name = d["name"]
         if "iPad" not in name:
             continue
-        if "iPad Pro 13" in name:
+        if preferred and name == preferred:
+            fit = 5
+        elif family and name.startswith(family):
+            fit = 4
+        elif "iPad Pro 13" in name:
             fit = 3
         elif "iPad Pro (12.9" in name:
             fit = 2
@@ -27,12 +36,12 @@ for runtime, devices in data["devices"].items():
             fit = 1
         else:
             fit = 0
-        ranked.append((version[0] < 26, fit, version, d["udid"], name))
+        ranked.append((version[0] < 26, fit, version, name, d["udid"]))
 
 ranked.sort(reverse=True)
 for r in ranked[:10]:
     print(r, file=sys.stderr)
 if not ranked:
     sys.exit("no iPad simulator available")
-print(f"Using {ranked[0][4]} (iOS {ranked[0][2][0]}.{ranked[0][2][1]})", file=sys.stderr)
-print(ranked[0][3])
+print(f"Using {ranked[0][3]} (iOS {ranked[0][2][0]}.{ranked[0][2][1]})", file=sys.stderr)
+print(ranked[0][4])

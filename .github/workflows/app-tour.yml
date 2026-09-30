@@ -16,6 +16,9 @@ jobs:
   tour:
     runs-on: macos-15
     timeout-minutes: 60
+    env:
+      # Simulator to capture on; see pick_sim.py for the fallbacks.
+      TOUR_DEVICE: "iPad Air 11-inch (M3)"
     steps:
       - uses: actions/checkout@v4
 
@@ -113,7 +116,7 @@ jobs:
               tour-output/debug/record_start.txt tour-output/debug/timeline.tsv)
             set -- $RANGE
             ffmpeg -hide_banner -y -loglevel error -i tour-output/tour.mov -ss "$1" -to "$2" \
-              -vf "transpose=2,scale=1376:-2,fps=30,format=yuv420p" \
+              -vf "transpose=2,scale=trunc(iw/4)*2:-2,fps=30,format=yuv420p" \
               -c:v libx264 -preset slow -crf 22 -tune stillimage -movflags +faststart -an "$DEST/tour.mp4"
           fi
           cp -R tour-output/debug/. "$DEST/debug/" || true
