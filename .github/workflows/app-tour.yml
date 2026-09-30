@@ -108,8 +108,13 @@ jobs:
             sips -s format jpeg -s formatOptions 85 --resampleWidth 1800 "$f" --out "$DEST/screenshots/$(basename "${f%.png}").jpg" > /dev/null
           done
           if [ -f tour-output/tour.mov ]; then
-            ffmpeg -hide_banner -y -loglevel error -i tour-output/tour.mov -vf "scale=trunc(iw/4)*2:-2" \
-              -c:v libx264 -preset slow -crf 26 -pix_fmt yuv420p -movflags +faststart -an "$DEST/tour.mp4"
+            # simctl records the portrait framebuffer: rotate the landscape tour upright and trim it to the test run.
+            RANGE=$(python3 -c 'import sys; s=float(open(sys.argv[1]).read()); t=dict((l.rstrip("\n").split("\t")[1], float(l.split("\t")[0])) for l in open(sys.argv[2])); print("%.2f %.2f" % (max(0, t["launch"]-s-2.4), t["end"]-s+0.8))' \
+              tour-output/debug/record_start.txt tour-output/debug/timeline.tsv)
+            set -- $RANGE
+            ffmpeg -hide_banner -y -loglevel error -i tour-output/tour.mov -ss "$1" -to "$2" \
+              -vf "transpose=2,scale=1376:-2,fps=30,format=yuv420p" \
+              -c:v libx264 -preset slow -crf 22 -tune stillimage -movflags +faststart -an "$DEST/tour.mp4"
           fi
           cp -R tour-output/debug/. "$DEST/debug/" || true
           du -sh "$DEST" "$DEST"/*
