@@ -1,0 +1,84 @@
+name: App tour
+
+# Builds BallotPlay for an iPad simulator, walks through every chapter with a
+# UI test, and uploads the screenshots plus a screen recording as an artifact.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/app-tour/**"
+      - ".github/workflows/app-tour.yml"
+
+jobs:
+  tour:
+    runs-on: macos-15
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: |
+          ls -d /Applications/Xcode*.app
+          XC=$(ls -d /Applications/Xcode_16*.app 2>/dev/null | sort -V | tail -1 || true)
+          if [ -n "$XC" ]; then sudo xcode-select -s "$XC"; fi
+          xcodebuild -version
+          xcrun simctl list runtimes
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Tag views for the UI test (CI only)
+        run: bash .github/app-tour/instrument.sh
+
+      - name: Generate Xcode project
+        working-directory: .github/app-tour
+        run: xcodegen generate
+
+      - name: Boot iPad simulator
+        run: |
+          UDID=$(python3 .github/app-tour/pick_sim.py)
+          echo "UDID=$UDID" >> "$GITHUB_ENV"
+          xcrun simctl boot "$UDID"
+          xcrun simctl bootstatus "$UDID" -b
+          xcrun simctl ui "$UDID" appearance light || true
+          xcrun simctl status_bar "$UDID" override --time "9:41" --dataNetwork wifi --wifiMode active --wifiBars 3 --batteryState charged --batteryLevel 100 || true
+
+      - name: Build
+        working-directory: .github/app-tour
+        run: |
+          xcodebuild build-for-testing \
+            -project BallotPlayTour.xcodeproj -scheme BallotPlayTour \
+            -destination "id=$UDID" -derivedDataPath build -quiet
+
+      - name: Run tour and record the screen
+        run: |
+          OUT="$PWD/tour-output"
+          mkdir -p "$OUT/screenshots" "$OUT/debug"
+          python3 -c 'import time; print(time.time())' > "$OUT/debug/record_start.txt"
+          xcrun simctl io "$UDID" recordVideo --codec=h264 --force "$OUT/tour.mov" 2> "$OUT/debug/record.log" &
+          REC=$!
+          sleep 3
+          set +e
+          TEST_RUNNER_TOUR_DIR="$OUT/screenshots" xcodebuild test-without-building \
+            -project .github/app-tour/BallotPlayTour.xcodeproj -scheme BallotPlayTour \
+            -destination "id=$UDID" -derivedDataPath .github/app-tour/build \
+            -resultBundlePath "$OUT/Tour.xcresult"
+          STATUS=$?
+          sleep 2
+          kill -INT "$REC"
+          wait "$REC"
+          ls -la "$OUT" "$OUT/screenshots"
+          exit $STATUS
+
+      - name: Export screenshots kept in the result bundle
+        if: always()
+        run: |
+          xcrun xcresulttool export attachments --path tour-output/Tour.xcresult --output-path tour-output/attachments || true
+          (cd tour-output && zip -qr Tour.xcresult.zip Tour.xcresult && rm -rf Tour.xcresult) || true
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ballotplay-tour
+          path: tour-output
+          retention-days: 14
