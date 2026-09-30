@@ -153,7 +153,9 @@ final class TourUITests: XCTestCase {
         openChapterMenu()
         snap("chapter-menu")
         let first = app.buttons["The Usual: Plurality"]
-        if first.waitForExistence(timeout: 3) { first.tap() }
+        if first.waitForExistence(timeout: 3) {
+            first.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
+        }
         waitForTitle("The Usual: Plurality")
         scrollGuideUp()
         snap("back-to-plurality")
@@ -377,22 +379,29 @@ final class TourUITests: XCTestCase {
     }
 
     private func dismissSheet() {
+        let body = app.staticTexts.matching(NSPredicate(format: "label CONTAINS 'Advocacy for alternative voting'")).firstMatch
         let title = app.staticTexts["So, what's next?"].firstMatch
         if title.exists {
-            title.swipeDown(velocity: .fast)
+            let start = title.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+            start.press(forDuration: 0.1, thenDragTo: start.withOffset(CGVector(dx: 0, dy: 700)), withVelocity: .fast, thenHoldForDuration: 0)
+        }
+        if !body.waitForNonExistence(timeout: 4) {
+            app.windows.firstMatch.coordinate(withNormalizedOffset: CGVector(dx: 0.03, dy: 0.5)).tap()
+            _ = body.waitForNonExistence(timeout: 4)
         }
         pause(1.5)
-        if app.staticTexts.matching(NSPredicate(format: "label CONTAINS 'Advocacy for alternative voting'")).firstMatch.exists {
-            app.windows.firstMatch.coordinate(withNormalizedOffset: CGVector(dx: 0.03, dy: 0.5)).tap()
-            pause(1.5)
-        }
     }
 
     private func openChapterMenu() {
         let bar = app.navigationBars.firstMatch
         let candidates = ["List", "list.bullet", "Bulleted list"].map { bar.buttons[$0] }
         let button = candidates.first { $0.exists } ?? bar.buttons.element(boundBy: 0)
-        button.tap()
+        // Coordinate taps skip the hittability check that trips on toolbar menus.
+        let menuItem = app.buttons["Spoiler Effect"]
+        for _ in 0..<3 where !menuItem.exists {
+            button.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
+            _ = menuItem.waitForExistence(timeout: 3)
+        }
         pause(1.5)
     }
 

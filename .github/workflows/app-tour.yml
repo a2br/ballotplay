@@ -9,6 +9,9 @@ on:
       - ".github/app-tour/**"
       - ".github/workflows/app-tour.yml"
 
+permissions:
+  contents: write
+
 jobs:
   tour:
     runs-on: macos-15
@@ -74,11 +77,44 @@ jobs:
         if: always()
         run: |
           xcrun xcresulttool export attachments --path tour-output/Tour.xcresult --output-path tour-output/attachments || true
-          (cd tour-output && zip -qr Tour.xcresult.zip Tour.xcresult && rm -rf Tour.xcresult) || true
+          mkdir -p results && mv tour-output/Tour.xcresult results/ || true
 
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: ballotplay-tour
-          path: tour-output
+          path: |
+            tour-output/screenshots
+            tour-output/debug
+            tour-output/tour.mov
           retention-days: 14
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-results
+          path: results
+          retention-days: 7
+
+      # Commits compressed copies to this branch so they can be viewed without
+      # downloading the artifact. The folder is hidden, so SwiftPM ignores it.
+      - name: Commit compressed media to the branch
+        if: always() && github.event_name == 'push'
+        run: |
+          brew install ffmpeg > /dev/null
+          DEST=.github/app-tour/media
+          rm -rf "$DEST" && mkdir -p "$DEST/screenshots" "$DEST/debug"
+          for f in tour-output/screenshots/*.png; do
+            sips -s format jpeg -s formatOptions 85 --resampleWidth 1800 "$f" --out "$DEST/screenshots/$(basename "${f%.png}").jpg" > /dev/null
+          done
+          if [ -f tour-output/tour.mov ]; then
+            ffmpeg -hide_banner -y -loglevel error -i tour-output/tour.mov -vf "scale=trunc(iw/4)*2:-2" \
+              -c:v libx264 -preset slow -crf 26 -pix_fmt yuv420p -movflags +faststart -an "$DEST/tour.mp4"
+          fi
+          cp -R tour-output/debug/. "$DEST/debug/" || true
+          du -sh "$DEST" "$DEST"/*
+          git config user.name "github-actions[bot]"
+          git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
+          git add "$DEST"
+          git commit -m "Update app tour media [skip ci]" -m "From run ${{ github.run_id }}"
+          git push origin "HEAD:${{ github.ref_name }}"

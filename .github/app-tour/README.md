@@ -10,8 +10,9 @@ screen recording of BallotPlay on a macOS runner.
 3. It boots an iPad simulator in landscape, records the screen with
    `simctl io recordVideo`, and runs the UI test. The test goes through all five
    chapters and saves a screenshot at each step.
-4. The screenshots, the `.mov` recording and a timeline of each step are uploaded
-   as the `ballotplay-tour` artifact.
+4. The full-resolution screenshots, the raw `.mov` recording and a timeline of
+   each step are uploaded as the `ballotplay-tour` artifact. Compressed copies
+   (JPEG screenshots and an MP4) are committed to `media/` on the same branch.
 
 This folder starts with a dot, so Swift Playgrounds and SwiftPM ignore it. The
 app package builds exactly as before.
